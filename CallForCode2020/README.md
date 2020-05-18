@@ -1,21 +1,22 @@
 # Call For Code 2020
-## React Native Expo CLI
+## Getting Started
 ```bash
-# build for ios
+# start expo
+expo start
+
+# server for ios
 expo start --ios
 
-# build for android
+# server for android
 expo start --android
 
-# build for web(connection: Local)
+# server for web(connection: Local)
 expo start --web
 ```
 ## File Structure
 ```bash
 .
-├─ .expo
 ├─ .expo-shared
-├─ node_modules
 ├─ .gitignore
 ├─ App.js
 ├─ app.json
@@ -23,10 +24,26 @@ expo start --web
 ├─ package.json
 ├─ README.md
 ├─ yarn.lock
-├─ assets               # images, fonts, etc...
+├─ assets                   # images, fonts, etc...
 │  ├─ fonts
 │  └─ images
+│     ├─ favicon.png
 │     ├─ icon.png
+│     ├─ robot-dev.png
+│     ├─ robot-prod.png
 │     └─ splash.png
-├─ views                # pages
+├─ components               # components
+│  ├─ StyledText.js
+│  └─ TabBarIcon.js
+├─ constants                # setting
+│  ├─ Colors.js
+│  └─ Layout.js
+├─ hooks
+├─ navigation               # navigation
+│  ├─ BottomTabNavigator.js
+│  └─ LinkingConfiguration.js
+├─ screens                  # screen(page)
+│  ├─ HomeScreen.js
+│  └─ LinksScreen.js
+
 ```
