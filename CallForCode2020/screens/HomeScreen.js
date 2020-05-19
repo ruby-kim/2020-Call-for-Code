@@ -1,13 +1,15 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View ,Button} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
+          <Button  title="Jungmin page"  color="orange" onPress={() => navigation.navigate('News')}/>
+          <Button  title="kyeongnam page"  color="orange" onPress={() => navigation.navigate('Link')}/>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
           <Image
