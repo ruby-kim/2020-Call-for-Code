@@ -7,6 +7,7 @@ import { Platform, StatusBar, StyleSheet, View,Button ,Alert} from 'react-native
 import NewsScreen from './screens/NewsScreen';
 import HomeScreen from './screens/HomeScreen';
 import LinkSCreen from './screens/LinksScreen';
+import NewsInfoScreen from './screens/NewsInfoScreen';
 
 
 const Stack = createStackNavigator();
@@ -14,9 +15,10 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="News" component={NewsScreen} />
-      <Stack.Screen name="Link" component={LinkSCreen} />
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="News" component={NewsScreen} />
+    <Stack.Screen name="Link" component={LinkSCreen} />
+    <Stack.Screen name="NewsInfo" component={NewsInfoScreen} />
     </Stack.Navigator>
   );
 }

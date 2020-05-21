@@ -32,7 +32,7 @@ export default function HomeScreen({navigation}) {
           </View>
 
           <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
+            Change any of the text, ave the file, and your app will automatically reload.
           </Text>
         </View>
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
       },
       android: {
-        elevation: 20,
+        elevation: 26,
       },
     }),
     alignItems: 'center',
