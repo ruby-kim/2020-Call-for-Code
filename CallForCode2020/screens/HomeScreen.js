@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
       },
       android: {
-        elevation: 26,
+        elevation: 28,
       },
     }),
     alignItems: 'center',
