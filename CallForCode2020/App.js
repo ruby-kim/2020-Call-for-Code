@@ -9,7 +9,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
-function MyStack() {
+function BottomTabNav() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="BottomNav" component={BottomTabNavigator} />
@@ -21,7 +21,7 @@ function MyStack() {
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack />
+      <BottomTabNav/>
     </NavigationContainer>
   );
 }

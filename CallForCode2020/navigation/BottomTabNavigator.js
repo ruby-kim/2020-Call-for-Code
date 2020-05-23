@@ -3,8 +3,10 @@ import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import ItemsScreen from '../screens/ItemsScreen';
+import BenefitsScreen from '../screens/BenefitsScreen'
+import AuthsScreen from '../screens/AuthsScreen';
 import NewsScreen from '../screens/NewsScreen';
+import ItemsScreen from '../screens/ItemsScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -23,10 +25,18 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Items"
-        component={ItemsScreen}
+        name="Benefits"
+        component={BenefitsScreen}
         options={{
-          title: 'Items',
+          title: 'Benefits',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Auths"
+        component={AuthsScreen}
+        options={{
+          title: 'Auths',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
@@ -38,6 +48,15 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
+      <BottomTab.Screen
+        name="Items"
+        component={ItemsScreen}
+        options={{
+          title: 'Items',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      
     </BottomTab.Navigator>
   );
 }
@@ -48,9 +67,13 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return 'Home';
+    case 'Benefits':
+      return 'Benefits';
+    case 'Auths':
+      return 'Auths';
     case 'News':
-      return 'News list';
+      return 'News';
     case 'Items':
-      return 'Item list'
+      return 'Items'
   }
 }
