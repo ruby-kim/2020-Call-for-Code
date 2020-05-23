@@ -8,8 +8,6 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
-          <Button  title="Jungmin page"  color="orange" onPress={() => navigation.navigate('News')}/>
-          <Button  title="kyeongnam page"  color="orange" onPress={() => navigation.navigate('Link')}/>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
           <Image
