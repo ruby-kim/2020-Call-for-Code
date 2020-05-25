@@ -1,0 +1,16 @@
+{
+  "name": "ibmnode",
+  "version": "1.0.0",
+  "description": "nodeServerForIbmCallforcode2020",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cfenv": "^1.2.2",
+    "express": "^4.17.1"
+  }
+}
