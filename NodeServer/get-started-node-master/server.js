@@ -36,7 +36,7 @@ insertOne.cloudant = function(doc, response) {
 }
 
 getAll.cloudant = function(response) {
-  var names = [];  
+  var names = [];
   mydb.list({ include_docs: true }, function(err, body) {
     if (!err) {
       body.rows.forEach(function(row) {
@@ -111,6 +111,10 @@ app.get("/api/visitors", function (request, response) {
   }
   getAll[vendor](response);
 });
+
+app.get("/api/test",function(req,res)){
+  res.send("Hello!");
+}
 
 // load local VCAP configuration  and service credentials
 var vcapLocal;
