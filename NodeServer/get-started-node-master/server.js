@@ -112,9 +112,9 @@ app.get("/api/visitors", function (request, response) {
   getAll[vendor](response);
 });
 
-app.get("/api/test",function(req,res)){
+app.get("/api/test",function(req,res){
   res.send("Hello!");
-}
+});
 
 // load local VCAP configuration  and service credentials
 var vcapLocal;
