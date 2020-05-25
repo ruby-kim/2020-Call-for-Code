@@ -1,6 +1,17 @@
 import * as React from 'react';
 import { StyleSheet,Button,View ,Text} from 'react-native';
 
+
+function getMoviesFromApi() {
+  return fetch('http://getstartednode-optimistic-eland-xu.mybluemix.net/api/test')
+    .then((response) => {
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export default function NewsInfoScreen({ route, navigation }) {
   const { itemId } = route.params;
   const { title } = route.params;

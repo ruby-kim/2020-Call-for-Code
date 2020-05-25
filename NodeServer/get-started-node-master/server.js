@@ -113,7 +113,7 @@ app.get("/api/visitors", function (request, response) {
 });
 
 app.get("/api/test",function(req,res){
-  res.send("Hello!");
+  res.send('{ "name":"John" }');
 });
 
 // load local VCAP configuration  and service credentials
