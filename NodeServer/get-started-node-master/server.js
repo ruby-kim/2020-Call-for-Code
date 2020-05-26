@@ -3,22 +3,14 @@ var app = express();
 var cfenv = require("cfenv");
 var bodyParser = require('body-parser')
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
 app.use(bodyParser.json())
 
 let mydb, cloudant;
-var vendor; // Because the MongoDB and Cloudant use different API commands, we
-            // have to check which command should be used based on the database
-            // vendor.
-var dbName = 'mydb';
+var vendor;
 
-// Separate functions are provided for inserting/retrieving content from
-// MongoDB and Cloudant databases. These functions must be prefixed by a
-// value that may be assigned to the 'vendor' variable, such as 'mongodb' or
-// 'cloudant' (i.e., 'cloudantInsertOne' and 'mongodbInsertOne')
+var dbName = 'mydb';
 
 var insertOne = {};
 var getAll = {};
@@ -51,36 +43,6 @@ getAll.cloudant = function(response) {
 
 let collectionName = 'mycollection'; // MongoDB requires a collection name.
 
-insertOne.mongodb = function(doc, response) {
-  mydb.collection(collectionName).insertOne(doc, function(err, body, header) {
-    if (err) {
-      console.log('[mydb.insertOne] ', err.message);
-      response.send("Error");
-      return;
-    }
-    doc._id = body.id;
-    response.send(doc);
-  });
-}
-
-getAll.mongodb = function(response) {
-  var names = [];
-  mydb.collection(collectionName).find({}, {fields:{_id: 0, count: 0}}).toArray(function(err, result) {
-    if (!err) {
-      result.forEach(function(row) {
-        names.push(row.name);
-      });
-      response.json(names);
-    }
-  });
-}
-
-/* Endpoint to greet and add a new visitor to database.
-* Send a POST request to localhost:3000/api/visitors with body
-* {
-*   "name": "Bob"
-* }
-*/
 app.post("/api/visitors", function (request, response) {
   var userName = request.body.name;
   var doc = { "name" : userName };
@@ -92,17 +54,6 @@ app.post("/api/visitors", function (request, response) {
   insertOne[vendor](doc, response);
 });
 
-/**
- * Endpoint to get a JSON array of all the visitors in the database
- * REST API example:
- * <code>
- * GET http://localhost:3000/api/visitors
- * </code>
- *
- * Response:
- * [ "Bob", "Jane" ]
- * @return An array of all the visitor names
- */
 app.get("/api/visitors", function (request, response) {
   var names = [];
   if(!mydb) {
@@ -116,19 +67,9 @@ app.get("/api/test",function(req,res){
   res.send('{ "name":"John" }');
 });
 
-// load local VCAP configuration  and service credentials
-var vcapLocal;
-try {
-  vcapLocal = require('./vcap-local.json');
-  console.log("Loaded local VCAP", vcapLocal);
-} catch (e) { }
-
-const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
-
-const appEnv = cfenv.getAppEnv(appEnvOpts);
   // Load the Cloudant library.
-  var Cloudant = require('@cloudant/cloudant');
-
+var Cloudant = require('@cloudant/cloudant');
+cloudant = Cloudant("https://0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix:c76f90f2ada09c44789d322f89e5f9249632487f5bacae039eecebadd3b0c412@0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix.cloudantnosqldb.appdomain.cloud");
 if(cloudant) {
   //database name
   dbName = 'mydb';
@@ -137,16 +78,19 @@ if(cloudant) {
     if(!err) //err if database doesn't already exists
       console.log("Created database: " + dbName);
   });
+/*
+  cloudant.db.delete(dbName,function(err,data){
+    if(!err)
+    console.log("지우기")
+  });*/
 
   // Specify the database we are going to use (mydb)...
   mydb = cloudant.db.use(dbName);
-
   vendor = 'cloudant';
 }
 
 //serve static file (index.html, images, css)
 app.use(express.static(__dirname + '/views'));
-
 
 
 var port = process.env.PORT || 3000
