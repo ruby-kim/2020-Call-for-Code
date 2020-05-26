@@ -126,57 +126,12 @@ try {
 const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
 
 const appEnv = cfenv.getAppEnv(appEnvOpts);
-
-if (appEnv.services['compose-for-mongodb'] || appEnv.getService(/.*[Mm][Oo][Nn][Gg][Oo].*/)) {
-  // Load the MongoDB library.
-  var MongoClient = require('mongodb').MongoClient;
-
-  dbName = 'mydb';
-
-  // Initialize database with credentials
-  if (appEnv.services['compose-for-mongodb']) {
-    MongoClient.connect(appEnv.services['compose-for-mongodb'][0].credentials.uri, null, function(err, db) {
-      if (err) {
-        console.log(err);
-      } else {
-        mydb = db.db(dbName);
-        console.log("Created database: " + dbName);
-      }
-    });
-  } else {
-    // user-provided service with 'mongodb' in its name
-    MongoClient.connect(appEnv.getService(/.*[Mm][Oo][Nn][Gg][Oo].*/).credentials.uri, null,
-      function(err, db) {
-        if (err) {
-          console.log(err);
-        } else {
-          mydb = db.db(dbName);
-          console.log("Created database: " + dbName);
-        }
-      }
-    );
-  }
-
-  vendor = 'mongodb';
-} else if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/[Cc][Ll][Oo][Uu][Dd][Aa][Nn][Tt]/)) {
   // Load the Cloudant library.
   var Cloudant = require('@cloudant/cloudant');
 
-  // Initialize database with credentials
-  if (appEnv.services['cloudantNoSQLDB']) {
-    // CF service named 'cloudantNoSQLDB'
-    cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
-  } else {
-     // user-provided service with 'cloudant' in its name
-     cloudant = Cloudant(appEnv.getService(/cloudant/).credentials);
-  }
-} else if (process.env.CLOUDANT_URL){
-  cloudant = Cloudant(process.env.CLOUDANT_URL);
-}
 if(cloudant) {
   //database name
   dbName = 'mydb';
-
   // Create a new "mydb" database.
   cloudant.db.create(dbName, function(err, data) {
     if(!err) //err if database doesn't already exists
