@@ -1,9 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import BenefitsScreen from '../screens/BenefitsScreen'
+import MypageScreen from '../screens/MypageScreen'
 import AuthsScreen from '../screens/AuthsScreen';
 import NewsScreen from '../screens/NewsScreen';
 import ItemsScreen from '../screens/ItemsScreen';
@@ -20,43 +25,42 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Home',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Benefits"
-        component={BenefitsScreen}
-        options={{
-          title: 'Benefits',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Auths"
-        component={AuthsScreen}
-        options={{
-          title: 'Auths',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: '홈',
+          tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="home" size={24} color="lightgray" />,
         }}
       />
       <BottomTab.Screen
         name="News"
         component={NewsScreen}
         options={{
-          title: 'News',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: '뉴스',
+          tabBarIcon: ({ focused }) => <FontAwesome focused={focused} name="newspaper-o" size={24} color="lightgray" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Auths"
+        component={AuthsScreen}
+        options={{
+          title: '인증',
+          tabBarIcon: ({ focused }) => <MaterialCommunityIcons focused={focused} name="camera-metering-partial" size={24} color="lightgray" />,
         }}
       />
       <BottomTab.Screen
         name="Items"
         component={ItemsScreen}
         options={{
-          title: 'Items',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: '그린상품',
+          tabBarIcon: ({ focused }) => <Entypo focused={focused} name="leaf" size={24} color="lightgray" />,
         }}
       />
-      
+      <BottomTab.Screen
+        name="Mypage"
+        component={MypageScreen}
+        options={{
+          title: '마이페이지',
+          tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="user" size={24} color="lightgray" />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
@@ -66,14 +70,14 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'Home';
-    case 'Benefits':
-      return 'Benefits';
-    case 'Auths':
-      return 'Auths';
+      return '홈';
     case 'News':
-      return 'News';
+      return '그린뉴스';
+    case 'Auths':
+      return '인증';
     case 'Items':
-      return 'Items'
+      return '그린상품';
+    case 'Mypage':
+      return '마이페이지'
   }
 }
