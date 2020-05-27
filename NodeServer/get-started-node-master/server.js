@@ -26,6 +26,38 @@ insertOne.cloudant = function(doc, response) {
   });
 }
 
+const getNewsList = () =>{
+  mydb.get('news', function(err, data) {
+    console.log('Data:', data);
+    doc = data;
+  });
+}
+
+const getNewsData = () =>{
+  mydb.get('news', function(err, data) {
+    console.log('Error:', err);
+    console.log('Data:', data);
+    doc = data;
+  });
+}
+
+const getProductList = () =>{
+  mydb.get('item', function(err, data) {
+    console.log('Error:', err);
+    console.log('Data:', data);
+    doc = data;
+  });
+}
+
+const getProductData = () =>{
+  mydb.get('item', function(err, data) {
+    console.log('Error:', err);
+    console.log('Data:', data);
+    doc = data;
+  });
+}
+
+
 getAll.cloudant = function(response) {
   var names = [];
   mydb.get('aaa', function(err, data) {
@@ -35,7 +67,7 @@ getAll.cloudant = function(response) {
     doc = data;
     //callback(err, data);
   });
-  /*
+
   mydb.list({ include_docs: true }, function(err, body) {
     console.log(body.rows[0].doc)
     if (!err) {
@@ -45,7 +77,7 @@ getAll.cloudant = function(response) {
       });
       response.json(names);
     }
-  });*/
+  });
   //return names;
 }
 
