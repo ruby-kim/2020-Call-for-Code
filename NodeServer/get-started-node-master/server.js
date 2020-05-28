@@ -1,12 +1,4 @@
-var express = require("express");
-var app = express();
-var cfenv = require("cfenv");
-var bodyParser = require('body-parser')
-
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use(bodyParser.json())
-
+const app = require('./app');
 let mydb, cloudant;
 
 var dbName = 'mydb';
@@ -82,30 +74,6 @@ getAll.cloudant = function(response) {
 
 let collectionName = 'mycollection'; // MongoDB requires a collection name.
 
-app.post("/api/visitors", function (request, response) {
-  var userName = request.body.name;
-  var doc = { "name" : userName , "description" : "qweqweqweqwveqwevqwe" , "test" : "test" };
-  if(!mydb) {
-    console.log("No database.");
-    response.send(doc);
-    return;
-  }
-  insertOne['cloudant'](doc, response);
-});
-
-app.get("/api/visitors", function (request, response) {
-  var names = [];
-  if(!mydb) {
-    response.json(names);
-    return;
-  }
-  getAll['cloudant'](response);
-});
-
-app.get("/api/test",function(req,res){
-  res.send('{ "name":"John" }');
-});
-
   // Load the Cloudant library.
 var Cloudant = require('@cloudant/cloudant');
 cloudant = Cloudant("https://0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix:c76f90f2ada09c44789d322f89e5f9249632487f5bacae039eecebadd3b0c412@0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix.cloudantnosqldb.appdomain.cloud");
@@ -125,12 +93,3 @@ if(cloudant) {
       console.log('Data:', data);
     });
 }
-
-//serve static file (index.html, images, css)
-app.use(express.static(__dirname + '/views'));
-
-
-var port = process.env.PORT || 3000
-app.listen(port, function() {
-    console.log("To view your app, open this link in your browser: http://localhost:" + port);
-});
