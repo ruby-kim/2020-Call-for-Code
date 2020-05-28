@@ -57,7 +57,6 @@ const getProductData = () =>{
   });
 }
 
-
 getAll.cloudant = function(response) {
   var names = [];
   mydb.get('aaa', function(err, data) {
