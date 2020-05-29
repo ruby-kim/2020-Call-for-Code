@@ -1,29 +1,27 @@
-var express = require("express");
-var app = express();
-var cfenv = require("cfenv");
-var bodyParser = require('body-parser');
+const cloudant = require('./cloudantControl');
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-app.post("/api/visitors", function (req, res) {
-  res.send('{ "name":"John" }');
-});
-
-app.get("/api/visitors", function (req,res) {
+function appApiPathCreate(app){
+  app.post("/api/visitors", function (req, res) {
     res.send('{ "name":"John" }');
-});
+  });
+  app.get("/api/visitors", function (req,res) {
+      res.send('{ "name":"John" }');
+  });
+  app.get("/api/test",function(req,res){
+    res.send('{ "name":"John" }');
+  });
+  app.get("/api/newslist",function(req,res){
+    cloudant.dbControl.getControl.getNewsList('newslist');
+  });
+  app.get("/api/news",function(req,res){
+    cloudant.dbControl.getControl.getNewsData('news');
+  });
+  app.get("/api/productList",function(req,res){
+    cloudant.dbControl.getControl.getProductList('productList');
+  });
+  app.get("/api/product",function(req,res){
+    cloudant.dbControl.getControl.getProductData('product');
+  });
+}
 
-app.get("/api/test",function(req,res){
-  res.send('{ "name":"John" }');
-});
-
-app.use(express.static(__dirname + '/views'));
-
-
-var port = process.env.PORT || 3000
-app.listen(port, function() {
-    console.log("Server Start" + port);
-});
-
-module.exports.app = app;
+module.exports.app = appApiPathCreate;
