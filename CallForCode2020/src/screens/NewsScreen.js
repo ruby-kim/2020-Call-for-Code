@@ -2,58 +2,29 @@ import * as React from 'react';
 import { Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 
-const DATA = [
-  {
-    id: 1,
-    title: 'item1',
-    price: '10,000원 -> 8,000원',
-    content: '이 물건은... ',
-  },
-  {
-    id: 2,
-    title: 'item2',
-    price: '10,000원 -> 8,000원',
-    content: '이 물건은... ',
-  },
-  {
-    id: 3,
-    title: 'item3',
-    price: '10,000원 -> 8,000원',
-    content: '이 물건은... ',
-  },
-  {
-    id: 4,
-    title: 'item4',
-    price: '10,000원 -> 8,000원',
-    content: '이 물건은... ',
-  },
-  {
-    id: 5,
-    title: 'item5',
-    price: '10,000원 -> 8,000원',
-    content: '이 물건은... ',
-  },
-];
+import NewsData from '../stores/News';
 
 
 function Item({ navigation, title }) {
   return (
     <View style={styles.item} >
-      <Text style={styles.title} onPress={() => navigation.navigate('ItemsInfo', {
+      <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
         title: title.title,
+        subtitle: title.subtitle,
       })}>{title.title}</Text>
-      <Text style={styles.price}>{title.price}</Text>
-      <Text style={styles.content}>{title.content}</Text>
+      <Text style={styles.subtitle}>{title.subtitle}</Text>
+      <Text style={styles.dateTitle}>{title.date}</Text>
     </View>
   );
 }
 
 
-export default function ItemsScreen({ navigation }) {
+export default function NewsScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
       <FlatList
-        data={DATA}
+        data={NewsData}
         renderItem={({ item }) => <Item navigation={navigation} title={item} />}
         keyExtractor={item => item.id}
       />
@@ -74,12 +45,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
   },
-  content: {
+  subtitle: {
     margin: 5,
     marginLeft: 9,
-    fontSize: 10,
+    fontSize: 15,
   },
   dateTitle: {
     textAlign: "right",

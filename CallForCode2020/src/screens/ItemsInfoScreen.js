@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { StyleSheet,Button,View ,Text} from 'react-native';
 
+
 export default function ItemsInfoScreen({ route, navigation }) {
-  const { itemId } = route.params;
-  const { title } = route.params;
+  const title = route.params.title;
+  const desc = route.params.desc;
+  
   return (
     <View>
-      <View style={styles.imgContainer}>
-        사진자리
+         <View style={styles.titleDiv}>
+            <Text style={styles.titleText}>{JSON.stringify(title)}</Text>
+         </View>
+      <View style={styles.titleDiv}>
+        <Text>{JSON.stringify(desc)} </Text>
       </View>
-      <View style={styles.itemDesContainer}>
-        <View style={styles.title}>
-          <Text>itemId: {JSON.stringify(itemId)} + " " + title: {JSON.stringify(title)}</Text>
-        </View>
-        <View style={Styles.contentContainer}>
+      <View style={styles.titleDiv}>
+        <Text>Like </Text>
+        <Text>Dislike </Text>
       </View>
-      </View>
+      <Button onPress={() => navigation.goBack()} title={"Back"} />
     </View>
   );
 }
@@ -25,12 +28,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
-  },
-  imgContainer: {
-    flex: 1,
-  },
-  itemDesContainer: {
-    flex: 3,
   },
   contentContainer: {
     paddingTop: 15,
