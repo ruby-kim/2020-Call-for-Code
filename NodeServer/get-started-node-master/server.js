@@ -81,15 +81,63 @@ if(cloudant) {
   //database name
   dbName = 'aaa';
   // Create a new "mydb" database.
-
+  var doc = { "name" : "c" };
   cloudant.db.create(dbName, function(err, data) {
     if(!err) //err if database doesn't already exists
       console.log("Created database: " + dbName);
   });
   mydb = cloudant.db.use(dbName);
 
-  mydb.insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
+/*
+  mydb.insert(doc, function(err, body, header) {
+     if (err) {
+       return console.log('[mydb.insert] ', err.message);
+     }
+   });*/
+
+   var names = [];
+   mydb.list({ include_docs: true }, function(err, body) {
+     if (!err) {
+       body.rows.forEach(function(row) {
+         if(row.doc.name)
+           console.log(row.doc.name);
+       });
+     }
+   });
+/*
+  mydb.list(function(er, body) {
+  	  if (er)
+  		  return console.log('Error listing docs')
+  		  body.rows.forEach(function(doc) {
+  			     console.log(doc);
+  		  })
+    })*/
+/*
+    mydb.list(function(er, body) {
+	  if (er)
+		  return console.log('Error listing docs')
+		  body.rows.forEach(function(doc) {
+			  if ( doc.id.substring(0,7) != '_design') {
+				  console.log('deleting id: %s, rev: %s', doc.id, doc.value.rev)
+				  mydb.destroy(doc.id, doc.value.rev, function(er, body){
+					  if (er) console.log('ERROR: %s', er)
+					  else console.log(body)
+				  })
+			  }
+		  })
+  })*/
+    /*
+  mydb.db.destroy('aaa', function(err, data) {
       console.log('Error:', err);
       console.log('Data:', data);
     });
+
+
+  mydb.get('b', function(err, data) {
+      console.log("======================================");
+      console.log('Error:', err);
+      console.log('Data:', data);
+      doc = data;
+    });*/
+
 }

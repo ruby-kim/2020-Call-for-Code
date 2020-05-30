@@ -1,23 +1,23 @@
 
-const getControl = {
-   getNewsList(mydb){
+const get = {
+   newsList(mydb){
     mydb.get('news', function(err, data) {
       console.log('Data:', data);
     });
   },
-   getNewsData(mydb){
+   newsData(mydb){
     mydb.get('news', function(err, data) {
       console.log('Error:', err);
       console.log('Data:', data);
     });
   },
-   getProductList(mydb){
+   productList(mydb){
     mydb.get('item', function(err, data) {
       console.log('Error:', err);
       console.log('Data:', data);
     });
   },
-   getProductData(mydb){
+   productData(mydb){
     mydb.get('item', function(err, data) {
       console.log('Error:', err);
       console.log('Data:', data);
@@ -25,4 +25,4 @@ const getControl = {
   }
 };
 
-module.exports.getControl = getControl;
+module.exports.get = get;
