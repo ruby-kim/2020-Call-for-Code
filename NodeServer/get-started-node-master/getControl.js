@@ -1,27 +1,48 @@
 
 const get = {
    newsList(mydb){
-    mydb.get('news', function(err, data) {
-      console.log('Data:', data);
-    });
+     mydb.list({ include_docs: true }, function(err, body) {
+       if (!err) {
+         body.rows.forEach(function(row) {
+           console.log(row);
+           if(row.doc.name)
+             console.log(row.doc.name);
+         });
+       }
+     });
   },
    newsData(mydb){
-    mydb.get('news', function(err, data) {
-      console.log('Error:', err);
-      console.log('Data:', data);
-    });
+     mydb.list({ include_docs: true }, function(err, body) {
+       if (!err) {
+         body.rows.forEach(function(row) {
+            console.log(row);
+           if(row.doc.name)
+             console.log(row.doc.name);
+         });
+       }
+     });
   },
    productList(mydb){
-    mydb.get('item', function(err, data) {
-      console.log('Error:', err);
-      console.log('Data:', data);
-    });
+     mydb.list({ include_docs: true }, function(err, body) {
+       if (!err) {
+         body.rows.forEach(function(row) {
+            console.log(row);
+           if(row.doc.name)
+             console.log(row.doc.name);
+         });
+       }
+     });
   },
    productData(mydb){
-    mydb.get('item', function(err, data) {
-      console.log('Error:', err);
-      console.log('Data:', data);
-    });
+     mydb.list({ include_docs: true }, function(err, body) {
+       if (!err) {
+         body.rows.forEach(function(row) {
+            console.log(row);
+           if(row.doc.name)
+             console.log(row.doc.name);
+         });
+       }
+     });
   }
 };
 

@@ -10,17 +10,22 @@ function appApiPathCreate(app){
   app.get("/api/test",function(req,res){
     res.send('{ "name":"John" }');
   });
+  app.get("/api/getInsertControl",function(req,res){
+    cloudant.dbControl.getInsertControl().set.newsList(cloudant.dbControl.getDbByName('aaa'));
+    res.send("success");
+  });
   app.get("/api/newslist",function(req,res){
     cloudant.dbControl.getControl().get.newsList(cloudant.dbControl.getDbByName('aaa'));
+    res.send("success");
   });
   app.get("/api/news",function(req,res){
     cloudant.dbControl.getControl().get.newsData('news');
   });
   app.get("/api/productList",function(req,res){
-    cloudant.dbControl.getControl().get.nroductList('productList');
+    cloudant.dbControl.getControl().get.productList('productList');
   });
   app.get("/api/product",function(req,res){
-    cloudant.dbControl.getControl().get.nroductData('product');
+    cloudant.dbControl.getControl().get.productData('product');
   });
 }
 

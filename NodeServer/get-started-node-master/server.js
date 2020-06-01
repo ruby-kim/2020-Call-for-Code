@@ -80,12 +80,13 @@ cloudant = Cloudant("https://0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix:c76f90
 if(cloudant) {
   //database name
   dbName = 'aaa';
-  // Create a new "mydb" database.
+  // Create a new "mydb" database.''
+  /*
   var doc = { "name" : "c" };
   cloudant.db.create(dbName, function(err, data) {
     if(!err) //err if database doesn't already exists
       console.log("Created database: " + dbName);
-  });
+  });*/
   mydb = cloudant.db.use(dbName);
 
 /*
@@ -112,7 +113,7 @@ if(cloudant) {
   			     console.log(doc);
   		  })
     })*/
-/*
+
     mydb.list(function(er, body) {
 	  if (er)
 		  return console.log('Error listing docs')
@@ -125,7 +126,7 @@ if(cloudant) {
 				  })
 			  }
 		  })
-  })*/
+  })
     /*
   mydb.db.destroy('aaa', function(err, data) {
       console.log('Error:', err);
