@@ -18,6 +18,7 @@ insertOne.cloudant = function(doc, response) {
   });
 }
 
+
 const getNewsList = () =>{
   mydb.get('news', function(err, data) {
     console.log('Data:', data);
