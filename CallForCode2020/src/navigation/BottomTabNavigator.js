@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
-import TabBarIcon from '../components/TabBarIcon';
+import tabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MypageScreen from '../screens/MypageScreen'
 import AuthsScreen from '../screens/AuthsScreen';
@@ -33,7 +33,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="News"
         component={NewsScreen}
         options={{
-          title: '뉴스',
+          title: '그린뉴스',
           tabBarIcon: ({ focused }) => <FontAwesome focused={focused} name="newspaper-o" size={24} color="lightgray" />,
         }}
       />
