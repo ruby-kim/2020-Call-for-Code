@@ -78,7 +78,7 @@
 <script>
     	//Submit data when enter key is pressed
         $('#description_text').keydown(function(e) {
-          var title = $('#description_text').val();
+          var title = $('#title_text').val();
         	var description = $('#description_text').val();
           if (e.which == 13) { //catch Enter key
             	//POST request to API to create a new visitor entry in the database

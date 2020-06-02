@@ -2,34 +2,62 @@ import * as React from 'react';
 import { Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 
-import NewsData from '../stores/News';
+
+class NewsScreenClass extends React.Component{
+  constructor(navigation) {
+    super()
+    this.state = { newsData : [], navigation : navigation}
+    getNewsListFromApi(this);
+ }
 
 
-function Item({ navigation, title }) {
-  return (
-    <View style={styles.item} >
-      <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
-        title: title.title,
-        subtitle: title.subtitle,
-      })}>{title.title}</Text>
-      <Text style={styles.subtitle}>{title.subtitle}</Text>
-      <Text style={styles.dateTitle}>{title.date}</Text>
-    </View>
-  );
+ render() {
+    return (
+      <SafeAreaView style={styles.container}>
+      <Button title="Go back" onPress={() => this.state.navigation.goBack()} />
+      <FlatList
+        data={this.state.newsData}
+        renderItem={({ item }) => <Item navigation={this.state.navigation} title={item} />}
+        keyExtractor={item => item.id}
+      />
+      </SafeAreaView>
+    );
+ }
 }
 
 
 export default function NewsScreen({ navigation }) {
+  return new NewsScreenClass(navigation);
+}
+
+function Item({ navigation, title }) {
   return (
-    <SafeAreaView style={styles.container}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <FlatList
-        data={NewsData}
-        renderItem={({ item }) => <Item navigation={navigation} title={item} />}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
+    <View style={styles.container} >
+      <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
+        title: title.title,
+        description: title.description,
+        id:title.id
+      })}>{title.title}</Text>
+      <Text style={styles.description}>{title.description}</Text>
+      <Text style={styles.dateTitle}>{title.dateTime}</Text>
+    </View>
   );
+}
+
+const getNewsListFromApi = (self) => {
+  //노드 js 키셨을 때 아이피 확인 후 바꿔주셔야해여 
+  // 임의 데이터 추가하고 싶으면 localhost:3000/index 들어가셔서 추가가능~
+  fetch('http://192.168.0.71:3000/api/newslist')
+  .then((response) => response.json())
+  .then((json) => {
+    json.rows.forEach(item =>{
+      self.state.newsData.push({ id : item.id,   title: item.doc.title,description : item.doc.description, dateTime : '2020-05-22' });
+      self.setState({newsData : self.state.newsData});
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 }
 
 

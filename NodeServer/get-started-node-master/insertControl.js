@@ -2,7 +2,7 @@
 const set = {
    newsList(mydb,req,res){
      console.log("dd");
-     mydb.insert({ newsId:'200528title', title: req.body.title, dateTime: 'dateTime' , description : req.body.description ,path:'/path'},
+     mydb.insert({ title: req.body.title, dateTime: 'dateTime' , description : req.body.description ,path:'/path'},
      function(err, data) {
          console.log('Error:', err);
          console.log('Data:', data);
@@ -15,7 +15,7 @@ const set = {
     });
   },
    productList(mydb,req,res){
-     mydb.insert({ productId:'title+dataTime', title: 'qwer',dateTime:'dateTime', description: 'description' ,path:'/path'},
+     mydb.insert({ title: 'qwer',dateTime:'dateTime', description: 'description' ,path:'/path'},
      function(err, data) {
          console.log('Error:', err);
          console.log('Data:', data);
