@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet,Button,View ,Text} from 'react-native';
+import { SafeAreaView,ScrollView,StyleSheet,Button,View ,Text} from 'react-native';
 
 
 export default function NewsInfoScreen({ route,navigation }) {
@@ -9,12 +9,14 @@ export default function NewsInfoScreen({ route,navigation }) {
 class NewsInfoClass extends React.Component{
   constructor(props,navigation) {
     super()
-    this.state = {  title: "",  description : "" ,dateTime : "", navigation : navigation}
+    this.state = {  title: props.title,  description : "" ,dateTime : props.dateTime, navigation : navigation}
     getNewsinfoFromApi(this,props.id);
  }
  render() {
     return (
-      <View>
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+       <View>
          <View  style={styles.titleDiv}>
             <Text style={styles.titleText}>{this.state.title}</Text>
          </View>
@@ -29,7 +31,9 @@ class NewsInfoClass extends React.Component{
           <Text>Dislike</Text>
         </View>
         <Button onPress={() => this.state.navigation.goBack()} title={"Back"} />
-      </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
     );
  }
 }
@@ -47,9 +51,7 @@ const getNewsinfoFromApi = (self,id) => {
    .then((response) => response.json())
    .then((json)=>{
      self.setState({
-       title : json.title,
-       description : json.description,
-       dateTime : json.dateTime
+       description : json.description
      });
    });
 }
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,    
   },
   titleText:{
-    fontSize : 40,
+    fontSize : 20,
     marginLeft:10,
   }
 });

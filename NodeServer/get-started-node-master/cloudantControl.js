@@ -9,17 +9,11 @@ if(!cloudant)
 
 const dbControl = {
   createTable(dbName){
-    cloudant.db.create(dbName, function(err, data) {
-      if(!err)
-        console.log("Created database: " + dbName);
-    });
+
   },
   getDbByName(dbName){
+   //cloudant.db.create(dbName);
    mydb = cloudant.db.use(dbName);
-   if(mydb == null){
-       this.dbControl.createTable(dbName);
-       return cloudant.db.use(dbName);
-   }
    return mydb;
   },
   getInsertControl(){

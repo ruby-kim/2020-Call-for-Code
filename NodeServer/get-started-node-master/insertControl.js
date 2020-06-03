@@ -1,28 +1,36 @@
 
 const set = {
    newsList(mydb,req,res){
-     console.log("dd");
-     mydb.insert({ title: req.body.title, dateTime: 'dateTime' , description : req.body.description ,path:'/path'},
+     var description = req.body.description;
+     if(description.length >= 40)
+        description = description.substr(0,40);
+     mydb.getDbByName('newslist').insert({ title: req.body.title , subTitle : description, dateTime: 'dateTime' },
      function(err, data) {
-         console.log('Error:', err);
-         console.log('Data:', data);
+       if(!err){
+         mydb.getDbByName('newsinfo').insert({_id:data.id, description : req.body.description ,path:'/path'},
+         function(er, da) {
+           console.log(da);
+         });}
+         console.log("Error" ,err);
+        console.log('Data:', data);
     });
+    res.send("dz");
   },
    newsData(mydb,req,res){
-     mydb.insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
+     mydb.getDbByName('aaa').insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
          console.log('Error:', err);
          console.log('Data:', data);
     });
   },
    productList(mydb,req,res){
-     mydb.insert({ title: 'qwer',dateTime:'dateTime', description: 'description' ,path:'/path'},
+     mydb.getDbByName('aaa').insert({ title: 'qwer',dateTime:'dateTime', description: 'description' ,path:'/path'},
      function(err, data) {
          console.log('Error:', err);
          console.log('Data:', data);
     });
   },
    productData(mydb,req,res){
-     mydb.insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
+     mydb.getDbByName('aaa').insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
          console.log('Error:', err);
          console.log('Data:', data);
      });

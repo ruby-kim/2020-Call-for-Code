@@ -35,11 +35,11 @@ function Item({ navigation, title }) {
     <View style={styles.container} >
       <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
         title: title.title,
-        description: title.description,
-        id:title.id
+        id:title.id,
+        dateTime :title.dateTime
       })}>{title.title}</Text>
-      <Text style={styles.description}>{title.description}</Text>
-      <Text style={styles.dateTitle}>{title.dateTime}</Text>
+      <Text style={styles.subtitle}>{title.subtitle}</Text>
+      <Text style={styles.dateTime}>{title.dateTime}</Text>
     </View>
   );
 }
@@ -51,7 +51,7 @@ const getNewsListFromApi = (self) => {
   .then((response) => response.json())
   .then((json) => {
     json.rows.forEach(item =>{
-      self.state.newsData.push({ id : item.id,   title: item.doc.title,description : item.doc.description, dateTime : '2020-05-22' });
+      self.state.newsData.push({ id : item.id, title: item.doc.title,subtitle : item.doc.subTitle, dateTime : '2020-05-22' });
       self.setState({newsData : self.state.newsData});
     });
   })
@@ -73,14 +73,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 25,
+    fontSize: 18,
+    marginLeft : 2
   },
   subtitle: {
     margin: 5,
     marginLeft: 9,
-    fontSize: 15,
+    fontSize: 10,
   },
-  dateTitle: {
+  dateTime: {
     textAlign: "right",
     fontSize: 11,
     margin: 2
