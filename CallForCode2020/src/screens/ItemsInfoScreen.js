@@ -2,26 +2,53 @@ import * as React from 'react';
 import { StyleSheet,Button,View ,Text} from 'react-native';
 
 
-export default function ItemsInfoScreen({ route, navigation }) {
-  const title = route.params.title;
-  const desc = route.params.desc;
-  
+class ItemsInfoScreenClass extends React.Component{
+  constructor(props,navigation) {
+    super()
+    this.state = {  title: props.title,  desc : "" ,dateTime : props.dateTime, navigation : navigation}
+    getProductinfoFromApi(this,props.id);
+ }
+ render() {
   return (
     <View>
          <View style={styles.titleDiv}>
-            <Text style={styles.titleText}>{JSON.stringify(title)}</Text>
+            <Text style={styles.titleText}>{JSON.stringify(this.state.title)}</Text>
          </View>
       <View style={styles.titleDiv}>
-        <Text>{JSON.stringify(desc)} </Text>
+        <Text>{JSON.stringify(this.state.desc)} </Text>
       </View>
       <View style={styles.titleDiv}>
         <Text>Like </Text>
         <Text>Dislike </Text>
       </View>
-      <Button onPress={() => navigation.goBack()} title={"Back"} />
+      <Button onPress={() => this.state.navigation.goBack()} title={"Back"} />
     </View>
   );
+ }
 }
+
+
+export default function ItemsInfoScreen({ route,navigation }) {
+  return new ItemsInfoScreenClass(route.params,navigation);
+}
+
+
+const getProductinfoFromApi = (self,id) => {
+  fetch('http://192.168.0.71:3000/api/productinfo', {
+   method: 'POST',
+   headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify({id : id})})
+   .then((response) => response.json())
+   .then((json)=>{
+     self.setState({
+       desc : json.description,
+     });
+   });
+}
+
 
 
 const styles = StyleSheet.create({

@@ -14,27 +14,17 @@ const get = {
        });
   },
    productList(mydb,req,res){
-     mydb.getDbByName('aaa').list({ include_docs: true }, function(err, body) {
-       if (!err) {
-          res.send(body);
-         body.rows.forEach(function(row) {
-            console.log(row);
-           if(row.doc.name)
-             console.log(row.doc.name);
-         });
-       }
+     mydb.getDbByName('productlist').list({ include_docs: true }, function(err, data) {
+       console.log("호출");
+       res.send(data);
      });
   },
    productData(mydb,req,res){
-     mydb.getDbByName('aaa').list({ include_docs: true }, function(err, body) {
-       if (!err) {
-         body.rows.forEach(function(row) {
-            console.log(row);
-           if(row.doc.name)
-             console.log(row.doc.name);
-         });
-       }
-     });
+     mydb.getDbByName('productinfo').get(req.body.id, function(err, data) {
+         console.log('Error:', err);
+         console.log('Data:', data);
+         res.send(data);
+       });
   }
 };
 

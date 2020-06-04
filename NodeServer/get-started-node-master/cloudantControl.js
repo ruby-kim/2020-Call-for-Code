@@ -12,7 +12,7 @@ const dbControl = {
 
   },
   getDbByName(dbName){
-   //cloudant.db.create(dbName);
+   cloudant.db.create(dbName);
    mydb = cloudant.db.use(dbName);
    return mydb;
   },

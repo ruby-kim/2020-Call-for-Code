@@ -14,27 +14,22 @@ const set = {
          console.log("Error" ,err);
         console.log('Data:', data);
     });
-    res.send("dz");
-  },
-   newsData(mydb,req,res){
-     mydb.getDbByName('aaa').insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
-         console.log('Error:', err);
-         console.log('Data:', data);
-    });
+    res.send("send");
   },
    productList(mydb,req,res){
-     mydb.getDbByName('aaa').insert({ title: 'qwer',dateTime:'dateTime', description: 'description' ,path:'/path'},
+     mydb.getDbByName('productlist').insert({
+       title: req.body.title, price : req.body.price , subTitle : req.body.subTitle, dateTime: 'dateTime' },
      function(err, data) {
-         console.log('Error:', err);
-         console.log('Data:', data);
+       if(!err){
+         mydb.getDbByName('productinfo').insert({_id:data.id, description : req.body.description ,path:'/path'},
+         function(er, da) {
+           console.log(da);
+         });}
+         console.log("Error" ,err);
+        console.log('Data:', data);
     });
+    res.send("send");
   },
-   productData(mydb,req,res){
-     mydb.getDbByName('aaa').insert({ _id: 'mydoc', a: 1, b: 'two' }, function(err, data) {
-         console.log('Error:', err);
-         console.log('Data:', data);
-     });
-  }
 };
 
 module.exports.set = set;

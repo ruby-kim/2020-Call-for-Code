@@ -61,6 +61,15 @@
             <p class="lead" data-i18n="description" style="margin:10px"></p>
             <input id="description_text" type="text" class="form-control" aria-describedby="sizing-addon1" value="" />
         </div>
+        <div id="subTitleInput" class="input-group-lg center-block helloInput">
+            <p class="lead" data-i18n="subTitleInput" style="margin:10px"></p>
+            <input id="subTitle_text" type="text" class="form-control" aria-describedby="sizing-addon1" value="" />
+        </div>
+
+        <div id="price" class="input-group-lg center-block helloInput">
+            <p class="lead" data-i18n="price" style="margin:10px"></p>
+            <input id="price_text" type="text" class="form-control" aria-describedby="sizing-addon1" value="" />
+        </div>
     </div>
     <div>
     </div>
@@ -77,16 +86,19 @@
 
 <script>
     	//Submit data when enter key is pressed
-        $('#description_text').keydown(function(e) {
+        $('#price_text').keydown(function(e) {
+          console.log("데이ㅓㅌ!");
           var title = $('#title_text').val();
         	var description = $('#description_text').val();
+          var subTitle = $('#subTitle_text').val();
+          var price = $('#price_text').val();
           if (e.which == 13) { //catch Enter key
             	//POST request to API to create a new visitor entry in the database
                 $.ajax({
 				  method: "POST",
-				  url: "./api/newsinsert",
+				  url: "./api/productinsert",
 				  contentType: "application/json",
-				  data: JSON.stringify({title: title ,description : description })
+				  data: JSON.stringify({title: title ,description : description,price : price,subTitle : subTitle })
 				}).done(function(data) {
                     if(data){
                         alert(data);
