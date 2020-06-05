@@ -9,7 +9,6 @@ if(!cloudant)
 
 const dbControl = {
   createTable(dbName){
-
   },
   getDbByName(dbName){
    cloudant.db.create(dbName);
