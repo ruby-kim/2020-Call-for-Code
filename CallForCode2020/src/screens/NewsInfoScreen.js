@@ -41,7 +41,7 @@ class NewsInfoClass extends React.Component{
 
 
 const getNewsinfoFromApi = (self,id) => {
-  fetch('http://192.168.0.71:3000/api/news', {
+  fetch('http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/news', {
    method: 'POST',
    headers: {
      'Accept': 'application/json',

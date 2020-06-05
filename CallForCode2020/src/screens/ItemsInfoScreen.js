@@ -34,7 +34,7 @@ export default function ItemsInfoScreen({ route,navigation }) {
 
 
 const getProductinfoFromApi = (self,id) => {
-  fetch('http://192.168.0.71:3000/api/productinfo', {
+  fetch('http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/productinfo', {
    method: 'POST',
    headers: {
      'Accept': 'application/json',

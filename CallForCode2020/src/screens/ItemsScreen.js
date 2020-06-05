@@ -59,7 +59,7 @@ export default function ItemsScreen({ navigation }) {
 const getItemListFromApi = (self) => {
   //노드 js 키셨을 때 아이피 확인 후 바꿔주셔야해여 
   // 임의 데이터 추가하고 싶으면 localhost:3000/item.html 들어가셔서 추가가능~
-  fetch('http://192.168.0.71:3000/api/productList')
+  fetch('http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/productList')
   .then((response) => response.json())
   .then((json) => {
     json.rows.forEach(item =>{
