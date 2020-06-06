@@ -1,8 +1,14 @@
+const query = {
+   "include_docs":true,
+   "limit": 8,
+   "skip": 0
+ };
 
 const get = {
    newsList(mydb,req,res){
-     mydb.getDbByName('newslist').list({ include_docs: true }, function(err, data) {
-       console.log("호출");
+     query.skip = req.body.skip;
+     mydb.getDbByName('newslist').list(query, function(err, data) {
+       console.log(data);
        res.send(data);
      });
   },
@@ -14,8 +20,9 @@ const get = {
        });
   },
    productList(mydb,req,res){
-     mydb.getDbByName('productlist').list({ include_docs: true }, function(err, data) {
-       console.log("호출");
+    query.skip = req.body.skip;
+     mydb.getDbByName('productlist').list(query, function(err, data) {
+       console.log(data);
        res.send(data);
      });
   },
@@ -25,7 +32,23 @@ const get = {
          console.log('Data:', data);
          res.send(data);
        });
-  }
+  },
+   postlist(mydb,req,res){
+    query.skip = req.body.skip;
+     mydb.getDbByName('postlist').list(query, function(err, data) {
+       console.log(data);
+       res.send(data);
+     });
+  },
+   postinfo(mydb,req,res){
+     var query = {"selector": {"postid" : req.body.id}};
+     mydb.getDbByName('postinfo').find(query, function(err, data) {
+         console.log('Error:', err);
+         console.log('Data:', data);
+         res.send(data);
+     });
+  },
+
 };
 
 module.exports.get = get;

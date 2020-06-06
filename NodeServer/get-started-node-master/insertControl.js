@@ -1,4 +1,3 @@
-
 const set = {
    newsList(mydb,req,res){
      var description = req.body.description;
@@ -30,6 +29,27 @@ const set = {
     });
     res.send("send");
   },
+   postlist(mydb,req,res){
+     mydb.getDbByName('postlist').insert({
+       userName: req.body.userName ,  description : req.body.description, dateTime: 'dateTime' , path:'/path' },
+     function(err, data) {
+
+
+        console.log("Error" ,err);
+        console.log('Data:', data);
+    });
+    res.send("send");
+  },
+  postinfo(mydb,req,res){
+    mydb.getDbByName('postinfo').insert({
+     postid: req.body.id, user: req.body.user , message : req.body.message, dateTime: 'dateTime' },
+    function(err, data) {
+      if(!err){}
+       console.log("Error", err);
+       console.log('Data:', data);
+   });
+   res.send("send");
+ },
 };
 
 module.exports.set = set;
