@@ -1,5 +1,21 @@
 const cloudant = require('./cloudantControl');
 function appApiPathCreate(app){
+  app.post("/api/createlogin",function(req,res){
+    cloudant.dbControl.getControl().set.login(cloudant.dbControl,req,res);
+  });
+
+  app.post("/api/login",function(req,res){
+    cloudant.dbControl.getControl().get.login(cloudant.dbControl,req,res);
+  });
+
+  app.get("/api/product",function(req,res){
+    cloudant.dbControl.getControl().get.productInfo(cloudant.dbControl,req,res);
+  });
+
+  app.get("/api/postinfo",function(req,res){
+    cloudant.dbControl.getControl().get.postinfo(cloudant.dbControl,req,res);
+  });
+
   app.post("/api/newslist",function(req,res){
     cloudant.dbControl.getControl().get.newsList(cloudant.dbControl,req,res);
   });
@@ -9,15 +25,10 @@ function appApiPathCreate(app){
   app.post("/api/productList",function(req,res){
     cloudant.dbControl.getControl().get.productList(cloudant.dbControl,req,res);
   });
-  app.get("/api/product",function(req,res){
-    cloudant.dbControl.getControl().get.productInfo(cloudant.dbControl,req,res);
-  });
   app.post("/api/postlist",function(req,res){
     cloudant.dbControl.getControl().get.postlist(cloudant.dbControl,req,res);
   });
-  app.get("/api/postinfo",function(req,res){
-    cloudant.dbControl.getControl().get.postinfo(cloudant.dbControl,req,res);
-  });
+
 
   app.post("/api/newsinsert",function(req,res){
     cloudant.dbControl.getInsertControl().set.newsList(cloudant.dbControl,req,res);

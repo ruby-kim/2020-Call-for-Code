@@ -38,8 +38,6 @@ class NewsInfoClass extends React.Component{
  }
 }
 
-
-
 const getNewsinfoFromApi = (self,id) => {
   fetch('http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/news', {
    method: 'POST',

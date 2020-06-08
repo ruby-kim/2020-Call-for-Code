@@ -5,6 +5,14 @@ const query = {
  };
 
 const get = {
+  login(mydb,req,res){
+    mydb.getDbByName('login').get(req.body.id, function(err, data) {
+        if(data.password == req.body.password)
+            res.send('success')
+        else
+            res.send('fail');
+    });
+ },
    newsList(mydb,req,res){
      query.skip = req.body.skip;
      console.log(req.body);
@@ -48,14 +56,7 @@ const get = {
          res.send(data);
      });
   },
-  postinfo(mydb,req,res){
-    mydb.getDbByName('postinfo').get(req.body.id, function(err, data) {
-        if(data.password == req.body.password)
-            res.send('success')
-        else
-            res.send('fail');
-    });
- },
+
 
 };
 
