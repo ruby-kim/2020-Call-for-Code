@@ -65,7 +65,7 @@ function Item({ navigation, title }) {
 
 const getNewsListFromApi = (self) => { 
   //http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/newslist
-  fetch('http://192.168.0.71:3000/api/newslist', {
+  fetch('https://my-nodejs-app-1234-wise-elephant-ui.mybluemix.net/api/newslist', {
     method: 'post',
     headers: {
       Accept: 'application/json',
