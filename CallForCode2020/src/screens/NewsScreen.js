@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
+import {Dimensions, ScrollView, Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
+
 
 
 class NewsScreenClass extends React.Component{
   constructor(navigation) {
     super()
-    this.state = { newsData : [], navigation : navigation}
+    this.state = {load : false , pages : 0, newsData : [], navigation : navigation}
     getNewsListFromApi(this);
  }
 
@@ -14,16 +15,34 @@ class NewsScreenClass extends React.Component{
  render() {
     return (
       <SafeAreaView style={styles.container}>
+        <ScrollView    onScroll={({nativeEvent}) => {
+      if (isCloseToBottom(nativeEvent)) {
+        if(this.state.load == false){
+          this.state.load = true;
+          getNewsListFromApi(this)
+        }
+         
+      }
+    }}
+    scrollEventThrottle={400}> 
       <Button title="Go back" onPress={() => this.state.navigation.goBack()} />
       <FlatList
         data={this.state.newsData}
         renderItem={({ item }) => <Item navigation={this.state.navigation} title={item} />}
         keyExtractor={item => item.id}
       />
+      
+      </ScrollView>
       </SafeAreaView>
     );
  }
 }
+
+const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+  const paddingToBottom = 20;
+  return layoutMeasurement.height + contentOffset.y >=
+    contentSize.height - paddingToBottom;
+};
 
 
 export default function NewsScreen({ navigation }) {
@@ -44,20 +63,27 @@ function Item({ navigation, title }) {
   );
 }
 
-const getNewsListFromApi = (self) => {
-  //노드 js 키셨을 때 아이피 확인 후 바꿔주셔야해여 
-  // 임의 데이터 추가하고 싶으면 localhost:3000/index 들어가셔서 추가가능~
-  fetch('http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/newslist')
-  .then((response) => response.json())
-  .then((json) => {
+const getNewsListFromApi = (self) => { 
+  //http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/newslist
+  fetch('http://192.168.0.71:3000/api/newslist', {
+    method: 'post',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({skip : self.state.pages}),
+  }).then(function(response) {
+    return response.json();
+  }).then(function(json) {
     json.rows.forEach(item =>{
       self.state.newsData.push({ id : item.id, title: item.doc.title,subtitle : item.doc.subTitle, dateTime : '2020-05-22' });
-      self.setState({newsData : self.state.newsData});
+      self.state.pages += 1;
     });
-  })
-  .catch((error) => {
-    console.error(error);
+    if(json.rows.length != 0)
+        self.state.load = false;
+    self.setState({newsData : self.state.newsData});
   });
+  
 }
 
 

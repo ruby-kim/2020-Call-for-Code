@@ -1,14 +1,14 @@
 const query = {
    "include_docs":true,
-   "limit": 8,
+   "limit": 6,
    "skip": 0
  };
 
 const get = {
    newsList(mydb,req,res){
      query.skip = req.body.skip;
+     console.log(req.body);
      mydb.getDbByName('newslist').list(query, function(err, data) {
-       console.log(data);
        res.send(data);
      });
   },
@@ -48,6 +48,14 @@ const get = {
          res.send(data);
      });
   },
+  postinfo(mydb,req,res){
+    mydb.getDbByName('postinfo').get(req.body.id, function(err, data) {
+        if(data.password == req.body.password)
+            res.send('success')
+        else
+            res.send('fail');
+    });
+ },
 
 };
 

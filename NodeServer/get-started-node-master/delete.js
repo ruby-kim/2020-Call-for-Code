@@ -80,7 +80,7 @@ var Cloudant = require('@cloudant/cloudant');
 cloudant = Cloudant("https://0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix:c76f90f2ada09c44789d322f89e5f9249632487f5bacae039eecebadd3b0c412@0e629378-636f-46ff-8639-14e1cc9b43f7-bluemix.cloudantnosqldb.appdomain.cloud");
 if(cloudant) {
   //database name
-  dbName = 'newslist';
+  dbName = 'newsinfo';
   // Create a new "mydb" database.''
   /*
   var doc = { "name" : "c" };
@@ -114,7 +114,7 @@ if(cloudant) {
   			     console.log(doc);
   		  })
     })*/
-
+/*
     mydb.list(function(er, body) {
 	  if (er)
 		  return console.log('Error listing docs')
@@ -127,7 +127,7 @@ if(cloudant) {
 				  })
 			  }
 		  })
-  })
+  })*/
     /*
   mydb.db.destroy('aaa', function(err, data) {
       console.log('Error:', err);

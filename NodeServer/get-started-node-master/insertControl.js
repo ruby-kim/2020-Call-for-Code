@@ -1,4 +1,11 @@
 const set = {
+   login(mydb,req,res){
+    mydb.getDbByName('login').insert({_id: req.body.id, password : req.body.password},
+    function(err, data) {
+      if(!err) res.send("Success");
+      else res.send("Fail");
+      });
+    },
    newsList(mydb,req,res){
      var description = req.body.description;
      if(description.length >= 40)
