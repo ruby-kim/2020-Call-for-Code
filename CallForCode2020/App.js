@@ -8,6 +8,9 @@ import NewsInfo from './src/screens/NewsInfoScreen';
 import AuthsInfo from './src/screens/AuthsInfoScreen';
 import ItemsInfo from './src/screens/ItemsInfoScreen';
 
+
+
+
 const Stack = createStackNavigator();
 
 function BottomTabNav() {
@@ -25,7 +28,7 @@ function BottomTabNav() {
 export default function App() {
   return (
     <NavigationContainer>
-      <BottomTabNav/>
+        <BottomTabNav/>
     </NavigationContainer>
   );
 }

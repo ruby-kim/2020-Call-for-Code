@@ -17,7 +17,7 @@ const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
 export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  navigation.setOptions({ headerTitle: getHeaderTitle(route), headerShown : false });
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
@@ -25,6 +25,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={HomeScreen}
         options={{
+          header: null,
           title: '홈',
           tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="home" size={24} color="lightgray" />,
         }}
@@ -66,6 +67,8 @@ export default function BottomTabNavigator({ navigation, route }) {
 }
 
 function getHeaderTitle(route) {
+  return null;
+  /*
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
@@ -79,5 +82,5 @@ function getHeaderTitle(route) {
       return '그린상품';
     case 'Mypage':
       return '마이페이지'
-  }
+  }*/
 }
