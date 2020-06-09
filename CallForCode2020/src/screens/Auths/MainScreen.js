@@ -8,7 +8,6 @@ import {
   Image 
 } from 'react-native';
 import Constants from 'expo-constants';
-import teamColor from '../../constants/UsageDescStyletyle'
 
 import AuthsData from '../../stores/Auths'
 
