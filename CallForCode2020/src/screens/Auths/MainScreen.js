@@ -8,8 +8,9 @@ import {
   Image 
 } from 'react-native';
 import Constants from 'expo-constants';
+import teamColor from '../../constants/UsageDescStyletyle'
 
-import AuthsData from '../stores/Auths'
+import AuthsData from '../../stores/Auths'
 
 
 function Item({ navigation, title }) {
@@ -28,9 +29,13 @@ function Item({ navigation, title }) {
 }
 
 
-export default function AuthsScreen({ navigation }) {
+export default function MainScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={teamColor}>
+        <Text style={teamColor.backgroundColor}>인증 리스트</Text>
+      </View>
+
       <FlatList
         data={AuthsData}
         renderItem={({ item }) => <Item navigation={navigation} title={item} />}
