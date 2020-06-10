@@ -6,13 +6,16 @@ const query = {
 
 const get = {
   login(mydb,req,res){
+
     mydb.getDbByName('login').get(req.body.id, function(err, data) {
       if(!err){
         if(data.password == req.body.password)
             res.send(data)
         else
             res.send("Fail");
-        }
+      }
+      else
+          res.send("Fail");
     });
  },
    newsList(mydb,req,res){

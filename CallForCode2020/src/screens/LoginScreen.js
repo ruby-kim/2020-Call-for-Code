@@ -5,9 +5,9 @@ import {
 } from 'react-native';
 
 
-async function loginClick(props){
+function loginClick(props){
   var data = {id:props.state.id, password : props.state.password};
-  await fetch('http://192.168.0.71:3000/api/login', {
+  fetch('http://192.168.0.102:3000/api/login', {
         method: 'post',
         headers: {
           Accept: 'application/json',
@@ -17,7 +17,9 @@ async function loginClick(props){
       }).then((response) => response.text())
       .then((json) => {
          if(json != "Fail")
-         props.state.prop.navigation.navigate('BottomNav', {});
+            props.state.prop.navigation.navigate('BottomNav', {});
+         else
+            alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
       })
 }
 
