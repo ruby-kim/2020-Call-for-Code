@@ -11,7 +11,9 @@ import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 
 const login = () =>{
-  return true;
+  
+
+  return false;
 }
 const Stack = createStackNavigator();
 

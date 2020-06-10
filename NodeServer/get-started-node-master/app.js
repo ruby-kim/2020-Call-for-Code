@@ -1,7 +1,7 @@
 const cloudant = require('./cloudantControl');
 function appApiPathCreate(app){
   app.post("/api/createlogin",function(req,res){
-    cloudant.dbControl.getControl().set.login(cloudant.dbControl,req,res);
+    cloudant.dbControl.getInsertControl().set.login(cloudant.dbControl,req,res);
   });
 
   app.post("/api/login",function(req,res){

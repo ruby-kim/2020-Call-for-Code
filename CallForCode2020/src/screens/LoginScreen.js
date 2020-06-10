@@ -4,12 +4,21 @@ import {
   TextInput, View,Button,Text
 } from 'react-native';
 
-const openRegisterScreen = ()=>{ 
-  alert("회원가입 버튼");
-} 
 
-const loginClick = () =>{
-  alert("로그인 버튼 클릭")
+async function loginClick(props){
+  var data = {id:props.state.id, password : props.state.password};
+  await fetch('http://192.168.0.71:3000/api/login', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then((response) => response.text())
+      .then((json) => {
+         if(json != "Fail")
+         props.state.prop.navigation.navigate('BottomNav', {});
+      })
 }
 
 const forgetPassword = () =>{
@@ -21,7 +30,7 @@ const forgetPassword = () =>{
 class LoginScrennClass extends React.Component{
   constructor(props) {
     super()
-    this.state = {load : false , pages : 0, items : [], prop : props}
+    this.state = {id:"",password:"", prop : props}
  }
 
  render() {
@@ -65,6 +74,7 @@ class LoginScrennClass extends React.Component{
         <Path d="M110.084 558.367h155.825v.684H110.084v-.684z" fill="#0DC6B6" />
       </Svg>
       <TextInput
+        onChangeText={(text) => { this.setState({id:text})}}
         editable={true}
         style={{ position: 'absolute',
         top: "33.5%",
@@ -74,6 +84,7 @@ class LoginScrennClass extends React.Component{
         backgroundColor: 'ivory'}}
       />
         <TextInput
+        onChangeText={(text) => { this.setState({password:text})}}
         editable={true}
         style={{ position: 'absolute',
         top: "44.8%",
@@ -84,7 +95,7 @@ class LoginScrennClass extends React.Component{
       />
       <Text
         //Login
-        onPress={()=>{this.state.prop.navigation.navigate('BottomNav', {});}}
+        onPress={()=>{loginClick(this);}}
         style={{ position: 'absolute',
         top: "56%",
         opacity:0,

@@ -4,6 +4,40 @@ import {
   TextInput, View,Text
 } from 'react-native';
 
+
+function RegisterScreen(props) {
+  return new RegisterScreenClass(props);
+}
+
+
+const onClickRegister =(prop)=>{
+   if(prop.state.password != prop.state.checkPassword){
+       alert("not a same");
+   }
+   else if(prop.state.id == "" ||  prop.state.password == "" || prop.state.name == ""){
+       alert(""); //수정필요
+   }
+   else{
+     var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
+     var data =  {id : "Tes", password : 11, name : 11}
+     fetch('http://192.168.0.71:3000/api/createlogin', {
+       method: 'post', 
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(data),
+     }).then((response) => response.text())
+     .then((json) => {
+      if(json == "Fail"){
+        alert("회원 가입 실패 : 아이디를 확인해주세요.");
+      }else{
+        prop.state.prop.navigation.navigate('Login', {});
+      }
+     })
+  }
+}
+
 class RegisterScreenClass extends React.Component{
   constructor(props) {
     super()
@@ -74,6 +108,7 @@ class RegisterScreenClass extends React.Component{
     />
    <TextInput
    //nickname
+      onChangeText={(text) => { this.setState({name:text})}}
       editable={true}
       style={{ position: 'absolute',
       top: "34.3%",
@@ -84,7 +119,7 @@ class RegisterScreenClass extends React.Component{
     />
     <TextInput
     //password
-      onChangeText={(text)=>{alert(text)}}
+      onChangeText={(text) => { this.setState({password:text})}}
       editable={true}
       style={{ position: 'absolute',
       top: "45.5%",
@@ -95,6 +130,7 @@ class RegisterScreenClass extends React.Component{
     />
     <TextInput
     //checkpassword
+    onChangeText={(text) => { this.setState({checkPassword:text})}}
       editable={true}
       style={{ position: 'absolute',
       top: "56.7%",
@@ -105,7 +141,7 @@ class RegisterScreenClass extends React.Component{
     />
     <Text
         //Register
-        onPress={()=>{alert(this.state.id)}}
+        onPress={()=>{onClickRegister(this)}}
         style={{ position: 'absolute',
         top: "67.9%",
         opacity:0,
@@ -140,17 +176,9 @@ class RegisterScreenClass extends React.Component{
     </View>
     );
     }
-      
 }
 
 
-function RegisterScreen(props) {
-   return new RegisterScreenClass(props);
-}
 
-
-const onClickRegister =()=>{
-  alert("dd");
-}
 
 export default RegisterScreen;
