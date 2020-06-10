@@ -64,16 +64,6 @@ class LoginScrennClass extends React.Component{
         />
         <Path d="M110.084 558.367h155.825v.684H110.084v-.684z" fill="#0DC6B6" />
       </Svg>
-      <Text
-          onPress={()=>{this.state.prop.navigation.goBack(null);}}
-        style={{ position: 'absolute',
-        top: "56%",
-        opacity:0,
-        left: "12.3%",
-        width: "75%",
-        height: "6%",
-        backgroundColor: 'ivory'}}
-      />
       <TextInput
         editable={true}
         style={{ position: 'absolute',
@@ -92,9 +82,20 @@ class LoginScrennClass extends React.Component{
         height: "6%",
         backgroundColor: 'ivory'}}
       />
-       
+      <Text
+        //Login
+        onPress={()=>{this.state.prop.navigation.navigate('BottomNav', {});}}
+        style={{ position: 'absolute',
+        top: "56%",
+        opacity:0,
+        left: "12.3%",
+        width: "75%",
+        height: "6%",
+        backgroundColor: 'ivory'}}
+      />
        <Text
-        onPress={()=>{ openRegisterScreen();}}
+       //Register
+        onPress={()=>{ this.state.prop.navigation.navigate('RegisterScreen', {});}}
         style={{ position: 'absolute',
         top: "65.8%",
         opacity:0,
@@ -103,6 +104,7 @@ class LoginScrennClass extends React.Component{
         height: "4%",
         backgroundColor: 'ivory'}}/>
         <Text
+        //Forget
         onPress={()=>{forgetPassword();}}
         style={{ position: 'absolute',
         opacity:0,
