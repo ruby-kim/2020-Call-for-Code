@@ -7,15 +7,15 @@ import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import NewsInfo from './src/screens/NewsInfoScreen';
 import AuthsInfo from './src/screens/AuthsInfoScreen';
 import ItemsInfo from './src/screens/ItemsInfoScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 
-
-
+//<Stack.Screen name="Login" component={LoginScreen} />
 const Stack = createStackNavigator();
 
 function BottomTabNav() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator  screenOptions={{ headerShown: false}}>
       <Stack.Screen name="BottomNav" component={BottomTabNavigator} />
       <Stack.Screen name="ItemsInfo" component={ItemsInfo}/>
       <Stack.Screen name="NewsInfo" component={NewsInfo}/>
@@ -27,7 +27,7 @@ function BottomTabNav() {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer> 
         <BottomTabNav/>
     </NavigationContainer>
   );

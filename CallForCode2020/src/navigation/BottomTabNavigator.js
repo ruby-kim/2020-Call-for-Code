@@ -12,6 +12,8 @@ import MypageScreen from '../screens/MypageScreen'
 import AuthsScreen from '../screens/AuthsScreen';
 import NewsScreen from '../screens/NewsScreen';
 import ItemsScreen from '../screens/ItemsScreen';
+import LoginScreen from '../screens/LoginScreen';
+
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -21,6 +23,15 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+      <BottomTab.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          header: null,
+          title: '홈',
+          tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="login" size={24} color="lightgray" />,
+        }}
+      />
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
