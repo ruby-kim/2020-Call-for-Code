@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import NewsInfo from './src/screens/NewsInfoScreen';
-import AuthsInfo from './src/screens/AuthsInfoScreen';
+import AuthsInfo from './src/screens/Auths/MainScreen';
 import ItemsInfo from './src/screens/ItemsInfoScreen';
 import LoginScreen from './src/screens/LoginScreen';
 

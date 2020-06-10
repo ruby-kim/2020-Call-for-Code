@@ -9,7 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 import tabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MypageScreen from '../screens/MypageScreen'
-import AuthsScreen from '../screens/AuthsScreen';
+import AuthsScreen from '../screens/Auths/MainScreen';
 import NewsScreen from '../screens/NewsScreen';
 import ItemsScreen from '../screens/ItemsScreen';
 import LoginScreen from '../screens/LoginScreen';

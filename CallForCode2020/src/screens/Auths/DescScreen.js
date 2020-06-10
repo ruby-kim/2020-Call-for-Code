@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 
 
-export default function AuthsInfoScreen({ route, navigation }) {
+export default function DescScreen({ route, navigation }) {
     const title = route.params.title;
     const desc = route.params.desc;
     const allow = route.params.allow;
