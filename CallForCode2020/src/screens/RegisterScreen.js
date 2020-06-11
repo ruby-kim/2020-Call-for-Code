@@ -19,7 +19,6 @@ const onClickRegister =(prop)=>{
    }
    else{
      var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
-     var data =  {id : "Tes", password : 11, name : 11}
      fetch('http://192.168.0.71:3000/api/createlogin', {
        method: 'post', 
        headers: {

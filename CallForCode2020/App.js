@@ -18,7 +18,7 @@ import StartScreen from './src/screens/StartScreen';
      Promise.all([AsyncStorage.getItem('isAuto'), AsyncStorage.getItem('id'), AsyncStorage.getItem('password')]).then((data) => {
          if ( data[0] != null && data[1] != null && data[2] != null) {
           var jsonData = {id:data[1], password : data[2]};
-          fetch('http://192.168.0.102:3000/api/login', {
+          fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
                method: 'post',
                headers: {
                  Accept: 'application/json',
@@ -41,8 +41,8 @@ import StartScreen from './src/screens/StartScreen';
 class FirstScreenClass extends React.Component{
     constructor() {
       super()
-      this.state = {loginState : true}
-      //login(this);
+      this.state = {loginState : false}
+      login(this);
    }
   
    render() {

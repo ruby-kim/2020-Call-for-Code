@@ -7,7 +7,7 @@ import {
 
 function loginClick(props){
   var data = {id:props.state.id, password : props.state.password};
-  fetch('http://192.168.0.102:3000/api/login', {
+  fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
         method: 'post',
         headers: {
           Accept: 'application/json',

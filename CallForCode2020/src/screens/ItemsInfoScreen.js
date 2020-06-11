@@ -34,7 +34,7 @@ export default function ItemsInfoScreen({ route,navigation }) {
 
 
 const getProductinfoFromApi = (self,id) => {
-  fetch('https://my-nodejs-app-1234-wise-elephant-ui.mybluemix.net/api/productinfo', {
+  fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/productinfo', {
    method: 'POST',
    headers: {
      'Accept': 'application/json',
