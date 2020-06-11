@@ -17,7 +17,7 @@ function loginClick(props){
       }).then((response) => response.text())
       .then((json) => {
          if(json != "Fail")
-            props.state.prop.navigation.navigate('BottomNav', {});
+            props.state.prop.navigation.navigate('StartScreen', {});
          else
             alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
       })

@@ -10,8 +10,9 @@ import AuthsInfo from './src/screens/Auths/MainScreen';
 import ItemsInfo from './src/screens/ItemsInfoScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import StartScreen from './src/screens/StartScreen';
 
-
+//초기에 시작시 로그인이 체크
  function login(props){
   try {
      Promise.all([AsyncStorage.getItem('isAuto'), AsyncStorage.getItem('id'), AsyncStorage.getItem('password')]).then((data) => {
@@ -48,6 +49,7 @@ class FirstScreenClass extends React.Component{
     return (
       <Stack.Navigator  screenOptions={{ headerShown: false}}>
         {this.state.loginState == false ? <Stack.Screen name="Login" component={LoginScreen}/> : null}
+        <Stack.Screen name="StartScreen" component={StartScreen}/>
         <Stack.Screen name="BottomNav" component={BottomTabNavigator} />
         <Stack.Screen name="ItemsInfo" component={ItemsInfo}/>
         <Stack.Screen name="NewsInfo" component={NewsInfo}/>
