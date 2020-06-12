@@ -6,11 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import NewsInfo from './src/screens/NewsInfoScreen';
-import AuthsInfo from './src/screens/Auths/MainScreen';
 import ItemsInfo from './src/screens/ItemsInfoScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import StartScreen from './src/screens/StartScreen';
+
+import DescScreen from './src/screens/Auths/DescScreen';
+import CameraScreen from './src/screens/Auths/CameraScreen';
+
+
 
 //초기에 시작시 로그인이 체크
  function login(props){
@@ -47,13 +51,16 @@ class FirstScreenClass extends React.Component{
   
    render() {
     return (
-      <Stack.Navigator  screenOptions={{ headerShown: false}}>
-        {this.state.loginState == false ? <Stack.Screen name="Login" component={LoginScreen}/> : null}
-        <Stack.Screen name="StartScreen" component={StartScreen}/>
+      // <Stack.Navigator  screenOptions={{ headerShown: false}}>
+      //   {this.state.loginState == false ? <Stack.Screen name="Login" component={LoginScreen}/> : null}
+      <Stack.Navigator>
+
+        <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}}/>
         <Stack.Screen name="BottomNav" component={BottomTabNavigator} />
         <Stack.Screen name="ItemsInfo" component={ItemsInfo}/>
         <Stack.Screen name="NewsInfo" component={NewsInfo}/>
-        <Stack.Screen name="AuthsInfo" component={AuthsInfo}/>
+        <Stack.Screen name="DescScreen" component={DescScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="CameraScree" component={CameraScreen} options={{headerShown: false}}/>
         <Stack.Screen name="RegisterScreen" component={RegisterScreen}/>
       </Stack.Navigator>
     );

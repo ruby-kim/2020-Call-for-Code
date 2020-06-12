@@ -6,6 +6,7 @@ import {
   Image
 } from 'react-native';
 
+
 import Constants from 'expo-constants';
 
 
@@ -13,6 +14,7 @@ export default function MypageScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
+      
         <Image 
           style={styles.userImage}
           source={require('../assets/images/robot-dev.png')}
