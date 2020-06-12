@@ -3,7 +3,7 @@ var multer  = require('multer')
 var profileStorage = multer.diskStorage({
   destination: function(req, file, cb) {
     console.log(req.files);
-    cb(null, 'img/profile/'+ Date.now() +file.originalname);
+    cb(null, '/views/img/profile/'+ Date.now() +file.originalname);
   },
   filename: function(req, file, cb) {
     cb(null, '' );
@@ -13,7 +13,7 @@ var profileStorage = multer.diskStorage({
 var certificationStorage = multer.diskStorage({
   destination: function(req, file, cb) {
     console.log(req.files);
-    cb(null, 'img/certification/'+ Date.now() +file.originalname);
+    cb(null, '/views/img/certification/'+ Date.now() +file.originalname);
   },
   filename: function(req, file, cb) {
     cb(null, '' );

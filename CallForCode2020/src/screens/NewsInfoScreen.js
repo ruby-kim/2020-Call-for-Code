@@ -63,11 +63,12 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   titleDiv: {
-    margin : 5,
-    borderWidth: 1,    
+    marginTop:"10%",
+    marginLeft:"4%",
+    width:"96%"  
   },
   titleText:{
     fontSize : 20,
-    marginLeft:10,
+    marginLeft:3,
   }
 });

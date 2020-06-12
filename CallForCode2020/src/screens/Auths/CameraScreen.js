@@ -44,10 +44,11 @@ const sendPictureToServer =(props)=>{
     }
 
     let formdata = new FormData();
-    let filename = photo.uri.split('/').pop();
+    let filename = Date.now() + photo.uri.split('/').pop();
     formdata.append("id", commonData._id);
     formdata.append("password", commonData._password);
-    formdata.append("uploaded_file", {uri: photo.uri, name: new Date().getDate()+filename, type: 'multipart/form-data'})
+    formdata.append("path",  "certification/"  + filename);
+    formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
     fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/certificationbyimg',{
       method: 'post',
       headers: {
@@ -55,9 +56,10 @@ const sendPictureToServer =(props)=>{
       },
       body: formdata
       }).then(response => {
-        console.log("image uploaded")
+        alert("image uploaded! +10 Point!");
+        commonData.initManager();
       }).catch(err => {
-        console.log(err)
+        alert(err);
       })  
 }
 
