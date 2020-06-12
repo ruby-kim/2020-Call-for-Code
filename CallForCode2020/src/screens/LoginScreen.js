@@ -8,11 +8,10 @@ import CommonDataManager from "../singleton/CommonDataManager"
 
 function loginClick(props){
 
-  /*
   if(props.state.id == "" || props.state.password == ""){
     alert("아이디와 비밀번호를 입력해주세요!");
     return;
-  }*/
+  }
 
 
   var data = {id:props.state.id, password : props.state.password};
@@ -26,13 +25,14 @@ function loginClick(props){
       }).then((response) => response.json())
       .then((json) => {
          if(json != "Fail"){  
+          AsyncStorage.clear();
           AsyncStorage.multiSet([
             ['isAuto', "true"],
             ['id', json._id],
             ['password', json.password]
         ]);
         CommonDataManager.getInstance().initManager();
-           props.state.prop.navigation.navigate('BottomNav', {});
+           props.state.prop.navigation.navigate('StartScreen', {});
          }
          else
             alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");

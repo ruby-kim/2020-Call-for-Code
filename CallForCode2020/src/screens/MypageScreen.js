@@ -97,10 +97,10 @@ class MypageScreenClass extends React.Component{
         </TouchableHighlight>
         <Text style={styles.userName}>{commonData._name}</Text>
       </View>
-      <View style={{marginBottom:"5%"}}>
+      <View style={{marginBottom:"5%",marginTop:"5%"}}>
         <Text style={styles.point}>Point :  {commonData._point}</Text>
         <Text style={styles.point}>Max Point : {commonData._maxPoint}</Text>
-        <Button title="erwerew" onPress= {()=>this.state.prop.navigate('CameraScreen', {})}></Button>
+       
       </View>
       <FlatList
         data={this.state.history}

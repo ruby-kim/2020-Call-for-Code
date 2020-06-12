@@ -14,19 +14,18 @@ class DescScreenClass extends React.Component {
             <View style={[styles.container, styles.size]}>
                 <DescDefaultTitle />
                 <MajorHeading />
-                {/* <Text
+                <Text
                     //Forget
-                    onPress={() => { this.state.prop.navigation.navigate('AuthsCamera', {}); }}
+                    onPress={() => { this.state.prop.navigation.navigate('CameraScreen', {}); }}
                     style={{
                         position: 'absolute',
-                        opacity: 1,
-                        top: "78%",
                         opacity: 0,
-                        left: "11.2%",
-                        width: "77%",
-                        height: "6%",
-                        backgroundColor: 'red'
-                    }} /> */}
+                        top: "42%",
+                        opacity: 1,
+                        left: "8%",
+                        width: "84%",
+                        height: "15%",
+                    }} />
             </View>
         )
     }

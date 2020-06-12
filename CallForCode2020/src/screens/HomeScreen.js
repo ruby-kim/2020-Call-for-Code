@@ -13,7 +13,7 @@ import Svg, {
   Use,
   Image,
 } from "react-native-svg"
-import { View } from 'react-native'
+import { View,Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Layout from '../constants/Layout'
@@ -226,6 +226,50 @@ function HomeScreen(props) {
         </Pattern>
       </Defs>
     </Svg>
+    <Text
+    //??
+        onPress={()=>{props.navigation.navigate('News', {})}}
+        style={{ position: 'absolute',
+        top: "21%",
+        opacity:0,
+        left: "11%",
+        width: "75%",
+        height: "13%",
+        backgroundColor: 'black'}}
+      />
+        <Text
+    //??
+        onPress={()=>{props.navigation.navigate('Auths', {})}}
+        style={{ position: 'absolute',
+        top: "38%",
+        opacity:0,
+        left: "11%",
+        width: "75%",
+        height: "13%",
+        backgroundColor: 'black'}}
+      />
+       <Text
+     //??
+        onPress={()=>{props.navigation.navigate('Items', {})}}
+        style={{ position: 'absolute',
+        top: "56%",
+        opacity:0,
+        left: "11%",
+        width: "75%",
+        height: "13%",
+        backgroundColor: 'black'}}
+      />
+      <Text
+     //??!
+        onPress={()=>{props.navigation.navigate('Mypage', {})}}
+        style={{ position: 'absolute',
+        top: "73%",
+        opacity:0,
+        left: "11%",
+        width: "75%",
+        height: "13%",
+        backgroundColor: 'black'}}
+      />
     </View>
   )
 }

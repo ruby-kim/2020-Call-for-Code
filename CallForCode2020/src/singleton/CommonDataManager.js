@@ -54,6 +54,7 @@ export default class CommonDataManager {
                   }).then((response) => response.json())
                   .then((json) => {   
                     if(json == "Fail"){
+                      this._isAutoLogin = "false";
                       return;
                     }
                     else{

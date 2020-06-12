@@ -23,7 +23,7 @@ const openImagePickerAsync = async (props) => {
     return;
   }
 
-  let pickerResult = await ImagePicker.launchImageLibraryAsync();
+  let pickerResult = await ImagePicker.launchCameraAsync();
   if (pickerResult.cancelled === true) 
     return;
 

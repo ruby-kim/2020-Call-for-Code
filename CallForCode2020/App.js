@@ -10,9 +10,15 @@ import ItemsInfo from './src/screens/ItemsInfoScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import StartScreen from './src/screens/StartScreen';
-
 import DescScreen from './src/screens/Auths/DescScreen';
 import CameraScreen from './src/screens/Auths/CameraScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import MypageScreen from './src/screens/MypageScreen'
+import AuthsScreen from './src/screens/Auths/MainScreen';
+import NewsScreen from './src/screens/NewsScreen';
+import ItemsScreen from './src/screens/ItemsScreen';
+
+
 
 import CommonDataManager from "./src/singleton/CommonDataManager"
 
@@ -23,7 +29,7 @@ let _isAutoLogin = commonData._isAutoLogin;
 class FirstScreenClass extends React.Component{
     constructor() {
       super()
-      this.state = {imgUrl : "" , loginState : _isAutoLogin}
+      this.state = {imgUrl : "" , loginState : _isAutoLogin == "true" ? true :false}
    }
   
    render() {
@@ -36,6 +42,11 @@ class FirstScreenClass extends React.Component{
         <Stack.Screen name="NewsInfo" component={NewsInfo}/>
         <Stack.Screen name="DescScreen" component={DescScreen} options={{headerShown: false}}/>
         <Stack.Screen name="CameraScreen" component={CameraScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
+        <Stack.Screen name="AuthsScreen" component={AuthsScreen}/>
+        <Stack.Screen name="MypageScreen" component={MypageScreen}/>
+        <Stack.Screen name="NewsScreen" component={NewsScreen}/>
+        <Stack.Screen name="ItemsScreen" component={ItemsScreen}/>
         <Stack.Screen name="RegisterScreen" component={RegisterScreen}/>
       </Stack.Navigator>
     );
