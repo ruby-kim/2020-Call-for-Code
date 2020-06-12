@@ -51,14 +51,16 @@ export default function NewsScreen({ navigation }) {
 
 function Item({ navigation, title }) {
   return (
-    <View style={styles.container} >
-      <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
+    <View style={styles.item} >
+      <View style={styles.list}>
+        <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
         title: title.title,
         id:title.id,
         dateTime :title.dateTime
-      })}>{title.title}</Text>
-      <Text style={styles.subtitle}>{title.subtitle}</Text>
-      <Text style={styles.dateTime}>{title.dateTime}</Text>
+        })}>{title.title}</Text>
+        <Text style={styles.subtitle}>{title.subtitle}</Text>
+        <Text style={styles.dateTime}>{title.dateTime}</Text>
+      </View>
     </View>
   );
 }
@@ -92,23 +94,23 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   item: {
-    backgroundColor: '#fefefe',
+    width:"96%",
+    marginTop:"2%",
+    marginLeft:"2%",
+    backgroundColor: '#efefef',
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   title: {
-    fontSize: 18,
-    marginLeft : 2
+    fontSize: 17,
+    marginLeft : 0
   },
   subtitle: {
-    margin: 5,
-    marginLeft: 9,
-    fontSize: 10,
+    marginLeft: 6,
+    marginTop:3,
+    fontSize: 12,
   },
   dateTime: {
     textAlign: "right",
     fontSize: 11,
-    margin: 2
   }
 });

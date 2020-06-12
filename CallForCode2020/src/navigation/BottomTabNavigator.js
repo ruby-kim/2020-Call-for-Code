@@ -14,7 +14,6 @@ import NewsScreen from '../screens/NewsScreen';
 import ItemsScreen from '../screens/ItemsScreen';
 import LoginScreen from '../screens/LoginScreen';
 
-
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 

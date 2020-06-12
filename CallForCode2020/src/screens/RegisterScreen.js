@@ -1,9 +1,11 @@
 import * as React from "react"
 import Svg, { Path, G,Rect,Circle } from "react-native-svg"
 import {
-  TextInput, View,Text
+  TextInput, View,Text,AsyncStorage
 } from 'react-native';
 
+import CommonDataManager from "../singleton/CommonDataManager"
+let commonData = CommonDataManager.getInstance();
 
 function RegisterScreen(props) {
   return new RegisterScreenClass(props);
@@ -19,7 +21,7 @@ const onClickRegister =(prop)=>{
    }
    else{
      var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
-     fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/createlogin', {
+     fetch('http://192.168.0.102:3000/api/createlogin', {
        method: 'post', 
        headers: {
          Accept: 'application/json',
@@ -32,6 +34,9 @@ const onClickRegister =(prop)=>{
         alert("회원 가입 실패 : 아이디를 확인해주세요.");
       }else{
         alert("회원가입 성공");
+        
+        AsyncStorage.clear();
+        commonData.clearCommonData();
         prop.state.prop.navigation.navigate('Login', {});
       }
      })

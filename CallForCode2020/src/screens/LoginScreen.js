@@ -8,15 +8,13 @@ import CommonDataManager from "../singleton/CommonDataManager"
 
 function loginClick(props){
 
+  /*
   if(props.state.id == "" || props.state.password == ""){
     alert("아이디와 비밀번호를 입력해주세요!");
     return;
-  }
-  
-  if(CommonDataManager.getInstance()._isAutoLogin == "true"){
-    props.state.prop.navigation.navigate('StartScreen', {});
-    return;
-  }
+  }*/
+
+
   var data = {id:props.state.id, password : props.state.password};
   fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
         method: 'post',
@@ -28,16 +26,13 @@ function loginClick(props){
       }).then((response) => response.json())
       .then((json) => {
          if(json != "Fail"){  
-          AsyncStorage.clear();
           AsyncStorage.multiSet([
             ['isAuto', "true"],
             ['id', json._id],
             ['password', json.password]
         ]);
-
-        alert(json._id);
         CommonDataManager.getInstance().initManager();
-           props.state.prop.navigation.navigate('StartScreen', {});
+           props.state.prop.navigation.navigate('BottomNav', {});
          }
          else
             alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
