@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Layout from '../../constants/Layout'
 
-class DescScreenClass extends React.Component {
+class CameraScreenClass extends React.Component {
     constructor(props) {
         super()
         this.state = { prop: props }
@@ -246,10 +246,10 @@ class DescScreenClass extends React.Component {
         )
     }
 }
-function DescScreen(props) {
-    return new DescScreenClass(props);
+function CameraScreen(props) {
+    return new CameraScreenClass(props);
 }
 
-export default DescScreen;
+export default CameraScreen;
 
 

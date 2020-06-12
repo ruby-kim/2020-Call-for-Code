@@ -28,15 +28,17 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={HomeScreen}
         options={{
           header: null,
-          title: '홈',
-          tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="home" size={24} color="lightgray" />,
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <Entypo focused={focused} name="home" size={24} color="lightgray" />
+          )
         }}
       />
       <BottomTab.Screen
         name="News"
         component={NewsScreen}
         options={{
-          title: '그린뉴스',
+          title: '',
           tabBarIcon: ({ focused }) => <FontAwesome focused={focused} name="newspaper-o" size={24} color="lightgray" />,
         }}
       />
@@ -44,15 +46,15 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Auths"
         component={AuthsScreen}
         options={{
-          title: '인증',
-          tabBarIcon: ({ focused }) => <MaterialCommunityIcons focused={focused} name="camera-metering-partial" size={24} color="lightgray" />,
+          title: '',
+          tabBarIcon: ({ focused }) => <MaterialCommunityIcons focused={focused} name="apple-keyboard-command" size={24} color="lightgray" />,
         }}
       />
       <BottomTab.Screen
         name="Items"
         component={ItemsScreen}
         options={{
-          title: '그린상품',
+          title: '',
           tabBarIcon: ({ focused }) => <Entypo focused={focused} name="leaf" size={24} color="lightgray" />,
         }}
       />
@@ -60,7 +62,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Mypage"
         component={MypageScreen}
         options={{
-          title: '마이페이지',
+          title: "",
           tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="user" size={24} color="lightgray" />,
         }}
       />
@@ -70,19 +72,4 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   return null;
-  /*
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-  switch (routeName) {
-    case 'Home':
-      return '홈';
-    case 'News':
-      return '그린뉴스';
-    case 'Auths':
-      return '인증';
-    case 'Items':
-      return '그린상품';
-    case 'Mypage':
-      return '마이페이지'
-  }*/
 }
