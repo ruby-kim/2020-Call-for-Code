@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
 
 
   howtousage: {
-    marginTop: "25%",
     marginLeft: "38%",
   },
 
@@ -112,5 +111,6 @@ const styles = StyleSheet.create({
   },
   groupingSvg: {
     flex: 3,
+    paddingBottom: '5%'
   }
 });
