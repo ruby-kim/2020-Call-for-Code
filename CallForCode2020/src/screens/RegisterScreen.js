@@ -19,7 +19,7 @@ const onClickRegister =(prop)=>{
    }
    else{
      var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
-     fetch('http://192.168.0.71:3000/api/createlogin', {
+     fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/createlogin', {
        method: 'post', 
        headers: {
          Accept: 'application/json',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -14,48 +14,26 @@ import StartScreen from './src/screens/StartScreen';
 import DescScreen from './src/screens/Auths/DescScreen';
 import CameraScreen from './src/screens/Auths/CameraScreen';
 
+import CommonDataManager from "./src/singleton/CommonDataManager"
 
-
+let commonData = CommonDataManager.getInstance();
+let _isAutoLogin = commonData._isAutoLogin;
 //초기에 시작시 로그인이 체크
- function login(props){
-  try {
-     Promise.all([AsyncStorage.getItem('isAuto'), AsyncStorage.getItem('id'), AsyncStorage.getItem('password')]).then((data) => {
-         if ( data[0] != null && data[1] != null && data[2] != null) {
-          var jsonData = {id:data[1], password : data[2]};
-          fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
-               method: 'post',
-               headers: {
-                 Accept: 'application/json',
-                 'Content-Type': 'application/json',
-               },
-               body: JSON.stringify(jsonData),
-             }).then((response) => response.text())
-             .then((json) => {
-               if(json == "Fail")
-                 alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
-                 props.setState({loginState : json != "Fail" ? true : false});
-             })
-         }
-      });
-   } catch (error) {
-      console.log(error);
-   }
+ function login(){
+  return _isAutoLogin;
 }
 
 class FirstScreenClass extends React.Component{
     constructor() {
       super()
-      this.state = {loginState : false}
-      login(this);
+      this.state = {imgUrl : "" , loginState : false}
    }
   
    render() {
     return (
-      // <Stack.Navigator  screenOptions={{ headerShown: false}}>
-      //   {this.state.loginState == false ? <Stack.Screen name="Login" component={LoginScreen}/> : null}
-      <Stack.Navigator>
-
-        <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}}/>
+       <Stack.Navigator  screenOptions={{ headerShown: false}}>
+       {this.state.loginState == false ? <Stack.Screen name="Login" component={LoginScreen}/> : null}
+       <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}}/>
         <Stack.Screen name="BottomNav" component={BottomTabNavigator} />
         <Stack.Screen name="ItemsInfo" component={ItemsInfo}/>
         <Stack.Screen name="NewsInfo" component={NewsInfo}/>

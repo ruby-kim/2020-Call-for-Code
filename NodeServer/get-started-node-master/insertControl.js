@@ -1,7 +1,7 @@
 const set = {
    login(mydb,req,res){
       mydb.getDbByName('login').insert({_id: req.body.id, password : req.body.password,
-        name : req.body.name ,maxPoint:0, point:0},
+        name : req.body.name ,maxPoint:0, point:0,path:"https://getstartednode-balanced-quokka-og.mybluemix.net/img/basic.jpg"},
     function(err, data) {
       if(!err) res.send("Success");
       else res.send("Fail");

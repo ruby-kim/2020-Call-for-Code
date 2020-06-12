@@ -1,12 +1,19 @@
 import * as React from "react"
 import Svg, { Path, G } from "react-native-svg"
 import {
-  TextInput, View,Button,Text
+  TextInput, View,Button,Text,AsyncStorage
 } from 'react-native';
 
+import CommonDataManager from "../singleton/CommonDataManager"
 
 function loginClick(props){
-  var data = {id:props.state.id, password : props.state.password};
+
+  if(CommonDataManager.getInstance()._isAutoLogin == "true"){
+    props.state.prop.navigation.navigate('StartScreen', {});
+    return;
+  }
+  //var data = {id:props.state.id, password : props.state.password};
+  var data = {id:"CallForCode", password : "1234"};
   fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
         method: 'post',
         headers: {
@@ -14,10 +21,17 @@ function loginClick(props){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      }).then((response) => response.text())
+      }).then((response) => response.json())
       .then((json) => {
-         if(json != "Fail")
-            props.state.prop.navigation.navigate('StartScreen', {});
+        //alert(json);
+         if(json != "Fail"){  
+          AsyncStorage.multiSet([
+            ['isAuto', "true"],
+            ['id', json._id],
+            ['password', json.password]
+        ]);
+          // props.state.prop.navigation.navigate('StartScreen', {});
+         }
          else
             alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
       })
@@ -36,7 +50,8 @@ class LoginScrennClass extends React.Component{
  }
 
  render() {
-    return ( <View>  
+    return ( 
+    <View>  
       <Svg width={"100%"} height={811} viewBox="0 0 375 811" fill="none" {...this.state.prop}>
         <Path fill="#F1F5F7" d="M0 0h375v811H0z" />
         <Path

@@ -13,7 +13,7 @@ class MainScreenClass extends React.Component {
       <View>
         <svg width={Layout.window.width} height={Layout.window.height} viewBox="0 0 375 812" fill="none" {...this.state.prop}>
           <g clipPath="url(#prefix__clip0)">
-            <path fill="#fff" d="M0 0h375v812H0z" />
+            <path fill="#fff" d="M0.0h375v812H0z" />
             <g clipPath="url(#prefix__clip1)" filter="url(#prefix__filter0_d)">
               <rect y={321} width={383} height={403} rx={6} fill="#fff" />
               <g filter="url(#prefix__filter1_d)">
