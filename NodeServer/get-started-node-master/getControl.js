@@ -6,7 +6,9 @@ const query = {
 
 const get = {
   login(mydb,req,res){
+      console.log(req.body.id);
     mydb.getDbByName('login').get(req.body.id, function(err, data) {
+
       if(!err){
         if(data.password == req.body.password)
             res.send(data)

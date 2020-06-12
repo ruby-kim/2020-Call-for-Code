@@ -15,7 +15,7 @@ const onClickRegister =(prop)=>{
        alert("not a same");
    }
    else if(prop.state.id == "" ||  prop.state.password == "" || prop.state.name == ""){
-       alert(""); //수정필요
+       alert("수정필요!"); //수정필요
    }
    else{
      var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
@@ -31,6 +31,7 @@ const onClickRegister =(prop)=>{
       if(json == "Fail"){
         alert("회원 가입 실패 : 아이디를 확인해주세요.");
       }else{
+        alert("회원가입 성공");
         prop.state.prop.navigation.navigate('Login', {});
       }
      })

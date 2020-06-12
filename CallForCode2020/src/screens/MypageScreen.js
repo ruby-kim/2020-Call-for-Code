@@ -11,7 +11,7 @@ import {
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import CommonDataManager from "../singleton/CommonDataManager"
-
+let commonData = CommonDataManager.getInstance();
 
 
 const editProfilePicture = async (props) => {
@@ -28,39 +28,33 @@ const editProfilePicture = async (props) => {
 
 
 
-    if(props.state.path.split('/').pop() == "basic.jpg"){
-        //?????? ??
-    }else{
-      //? ???? ??
-    }
-    
-
-    return;
     let photo = { uri: pickerResult.uri }
     let formdata = new FormData();
-    let filename = photo.uri.split('/').pop();
+    let filename = commonData._rev + commonData._id + "." + commonData._path.split('/').pop().split('.').pop();
 
-    formdata.append("nspeakers", 'test')
-    formdata.append("uploaded_file", {uri: photo.uri, name: new Date().getDate()+filename, type: 'multipart/form-data'})
-    
-    fetch('http://192.168.0.71:3000/stats',{
+    formdata.append("id", commonData._id);
+    formdata.append("password", commonData._password);
+    formdata.append("path",filename);
+    formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
+
+    props.setState({path:"https://getstartednode-balanced-quokka-og.mybluemix.net" + filename});
+    fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/profile',{
       method: 'post',
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       body: formdata
-      }).then(response => {
-        console.log("image uploaded")
-      }).catch(err => {
-        console.log(err)
-      })  
+      }).then((response) => response.text())
+      .then((json) => {
+        alert(json);
+      });
 };
 
 
 class MypageScreenClass extends React.Component{
   constructor(props) {
     super()
-    let commonData = CommonDataManager.getInstance();
+
     this.state = {path:commonData._path, prop : props}
  }
 

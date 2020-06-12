@@ -64,7 +64,6 @@ function Item({ navigation, title }) {
 }
 
 const getNewsListFromApi = (self) => { 
-  //http://my-nodejs-app-1234-reflective-porcupine-nh.mybluemix.net/api/newslist
   fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/newslist', {
     method: 'post',
     headers: {

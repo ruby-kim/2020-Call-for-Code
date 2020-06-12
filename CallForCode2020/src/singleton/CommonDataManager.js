@@ -1,4 +1,5 @@
-import {AsyncStorage} from 'react-native';
+import * as React from 'react';
+import {AsyncStorage , Image} from 'react-native';
 
 export default class CommonDataManager {
 
@@ -6,6 +7,7 @@ export default class CommonDataManager {
 
     _isAutoLogin = false;
     _id = "";
+    _rev = "";
     _password = "";
     _path = "";
     _point = "";
@@ -44,18 +46,19 @@ export default class CommonDataManager {
                     else{
                       this._isAutoLogin = "true";
                       this._id = json._id;
+                      this._rev = json._rev;
                       this._name = json.name;
                       this._password = json.password;
                       this._path = json.path;
                       this._point = json.point;
                       this._maxPoint = json.maxPoint;
-                      alert( this._maxPoint);
                     }
                   })
               }
 
             });
     }
+    
 
     getUserID() {
         return this._userID;

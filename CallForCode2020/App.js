@@ -19,14 +19,11 @@ import CommonDataManager from "./src/singleton/CommonDataManager"
 let commonData = CommonDataManager.getInstance();
 let _isAutoLogin = commonData._isAutoLogin;
 //초기에 시작시 로그인이 체크
- function login(){
-  return _isAutoLogin;
-}
 
 class FirstScreenClass extends React.Component{
     constructor() {
       super()
-      this.state = {imgUrl : "" , loginState : false}
+      this.state = {imgUrl : "" , loginState : _isAutoLogin}
    }
   
    render() {
@@ -38,7 +35,7 @@ class FirstScreenClass extends React.Component{
         <Stack.Screen name="ItemsInfo" component={ItemsInfo}/>
         <Stack.Screen name="NewsInfo" component={NewsInfo}/>
         <Stack.Screen name="DescScreen" component={DescScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="CameraScree" component={CameraScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="CameraScreen" component={CameraScreen} options={{headerShown: false}}/>
         <Stack.Screen name="RegisterScreen" component={RegisterScreen}/>
       </Stack.Navigator>
     );

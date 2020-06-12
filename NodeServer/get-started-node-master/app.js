@@ -1,18 +1,17 @@
 const cloudant = require('./cloudantControl');
-const upload  = require('./multerControl').upload;
+const certification  = require('./multerControl').certification;
+const profile  = require('./multerControl').profile;
 
 
 
 function appApiPathCreate(app){
-  app.post('/stats', upload.single('uploaded_file'), function (req, res) {
-     // req.file is the name of your file in the form above, here 'uploaded_file'
-     // req.body will hold the text fields, if there were any
-     res.send("ㅇㅇㅇ");
-     
-     console.log(Date.now(),req.file, req.body.nspeakers)
+
+  app.post('/profile', profile.single('uploaded_file'), function (req, res) {
+    cloudant.dbControl.getCertificationControl().set.profile(cloudant.dbControl,req,res);
   });
-
-
+  app.post('/certificationbyimg', certification.single('uploaded_file'), function (req, res) {
+     cloudant.dbControl.getCertificationControl().set.certification(cloudant.dbControl,req,res);
+  });
   app.post("/api/createlogin",function(req,res){
     cloudant.dbControl.getInsertControl().set.login(cloudant.dbControl,req,res);
   });
