@@ -1,5 +1,18 @@
 const cloudant = require('./cloudantControl');
+const upload  = require('./multerControl').upload;
+
+
+
 function appApiPathCreate(app){
+  app.post('/stats', upload.single('uploaded_file'), function (req, res) {
+     // req.file is the name of your file in the form above, here 'uploaded_file'
+     // req.body will hold the text fields, if there were any
+     res.send("ㅇㅇㅇ");
+     
+     console.log(Date.now(),req.file, req.body.nspeakers)
+  });
+
+
   app.post("/api/createlogin",function(req,res){
     cloudant.dbControl.getInsertControl().set.login(cloudant.dbControl,req,res);
   });
