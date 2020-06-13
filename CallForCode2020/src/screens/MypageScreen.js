@@ -49,7 +49,6 @@ const editProfilePicture = async (props) => {
       body: formdata
       }).then((response) => response.text())
       .then((json) => {
-        alert(json);
         commonData.initManager();
       });
 };
@@ -74,12 +73,13 @@ class MypageScreenClass extends React.Component{
   constructor(props) {
     super()
     var data = [];
+    commonData.saveState(this);
     if(commonData._history != "null"){  
       commonData._history.split(' ').forEach(item=>{
         data.push({ path : item});
     })}
   
-    this.state = {history :data, path:commonData._path, prop : props}
+    this.state = {history :data,point : commonData._point,  path:commonData._path, prop : props}
     }
 
    
@@ -98,8 +98,8 @@ class MypageScreenClass extends React.Component{
         <Text style={styles.userName}>{commonData._name}</Text>
       </View>
       <View style={{marginBottom:"5%",marginTop:"5%"}}>
-        <Text style={styles.point}>Point :  {commonData._point}</Text>
-        <Text style={styles.point}>Max Point : {commonData._maxPoint}</Text>
+        <Text style={styles.point}>Point :  {this.state.point}</Text>
+        <Text style={styles.point}>Max Point : {this.state.point}</Text>
        
       </View>
       <FlatList

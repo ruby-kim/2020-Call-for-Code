@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AsyncStorage , Image} from 'react-native';
+import {AsyncStorage , Image, Alert} from 'react-native';
 
 export default class CommonDataManager {
 
@@ -15,6 +15,7 @@ export default class CommonDataManager {
     _name = "";
     _history = "";
     
+    _stats=null;
     /**
      * @returns {CommonDataManager}
      */
@@ -24,6 +25,15 @@ export default class CommonDataManager {
             this.myInstance.initManager();
         }
         return this.myInstance;
+    }
+
+    async updateState(){
+      if(_stats !=null)
+         _stats.setState({});
+    }
+
+    async saveState(state){
+      _stats = state;
     }
 
     async clearCommonData(){
@@ -54,7 +64,6 @@ export default class CommonDataManager {
                   }).then((response) => response.json())
                   .then((json) => {   
                     if(json == "Fail"){
-                      this._isAutoLogin = "false";
                       return;
                     }
                     else{
@@ -68,24 +77,20 @@ export default class CommonDataManager {
                         this._path  = "https://getstartednode-balanced-quokka-og.mybluemix.net/img/profile/basic.jpg";
                       else 
                         this._path  = "https://getstartednode-balanced-quokka-og.mybluemix.net/img/" + json.path;
-
-                        console.log( this._path );
                       this._point = json.point;
-                      this._maxPoint = json.maxPoint;
+                      this._maxPoint = json.point;
                       this._history =json.hispath == " " ? json.path : json.hispath;
+
+                      if(_stats !=null){
+                        _stats.setState({point: this._point });
+                        updateState();
+                      }
+                     
                     }
                   })
               }
 
             });
     }
-    
-
-    getUserID() {
-        return this._userID;
-    }
-
-    setUserID(id) {
-        this._userID = id;
-    }
+  
 }

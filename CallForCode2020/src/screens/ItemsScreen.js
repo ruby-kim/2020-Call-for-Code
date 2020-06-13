@@ -19,7 +19,7 @@ function Item({ navigation, title }) {
       <Text style={styles.title} onPress={() => 
         navigation.navigate('ItemsInfo', {
           title: title.title,
-          desc: title.desc
+          id: title.id
         })
       }>{title.title}</Text>
       <Text style={styles.price}>{title.price}</Text>
@@ -74,7 +74,7 @@ export default function ItemsScreen({ navigation }) {
 
 
 const getItemListFromApi = (self) => {
-  //노드 js 키셨을 때 아이피 확인 후 바꿔주셔야해여 
+  //노드 js 키셨을 때 아이피 확인 후 바꿔주셔야해여 https://getstartednode-balanced-quokka-og.mybluemix.net/
   // 임의 데이터 추가하고 싶으면 localhost:3000/item.html 들어가셔서 추가가능~
   fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/productList', {
     method: 'post',

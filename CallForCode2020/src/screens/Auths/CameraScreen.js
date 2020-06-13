@@ -49,18 +49,18 @@ const sendPictureToServer =(props)=>{
     formdata.append("password", commonData._password);
     formdata.append("path",  "certification/"  + filename);
     formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
-    fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/certificationbyimg',{
+    fetch('http://192.168.0.102:3000/certificationbyimg',{
       method: 'post',
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       body: formdata
-      }).then(response => {
-        alert("image uploaded! +10 Point!");
-        commonData.initManager();
-      }).catch(err => {
-        alert(err);
-      })  
+      }).then((response) => response.text())
+      .then((json) => {   
+       alert("Plus +10 Point!");
+      } );
+     
+      
 }
 
 

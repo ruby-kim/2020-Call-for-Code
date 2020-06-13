@@ -21,7 +21,7 @@ const onClickRegister =(prop)=>{
    }
    else{
      var data =  {id : prop.state.id, password : prop.state.password, name : prop.state.name}
-     fetch('http://192.168.0.102:3000/api/createlogin', {
+     fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/createlogin', {
        method: 'post', 
        headers: {
          Accept: 'application/json',
@@ -105,33 +105,33 @@ class RegisterScreenClass extends React.Component{
       onChangeText={(text) => { this.setState({id:text})}}
       editable={true}
       style={{ position: 'absolute',
-      top: "23%",
+      top: "25%",
       left: "15%",
       width: "70%",
-      height: "6%",
-      backgroundColor: 'ivory'}}
+      height: "5%",
+      }}
     />
    <TextInput
    //nickname
       onChangeText={(text) => { this.setState({name:text})}}
       editable={true}
       style={{ position: 'absolute',
-      top: "34.3%",
+      top: "35%",
       left: "15%",
       width: "70%",
-      height: "6%",
-      backgroundColor: 'ivory'}}
+      height: "5%",
+      }}
     />
     <TextInput
     //password
       onChangeText={(text) => { this.setState({password:text})}}
       editable={true}
       style={{ position: 'absolute',
-      top: "45.5%",
+      top: "46%",
       left: "15%",
       width: "70%",
-      height: "6%",
-      backgroundColor: 'ivory'}}
+      height: "5%",
+      }}
     />
     <TextInput
     //checkpassword
@@ -141,8 +141,8 @@ class RegisterScreenClass extends React.Component{
       top: "56.7%",
       left: "15%",
       width: "70%",
-      height: "6%",
-      backgroundColor: 'ivory'}}
+      height: "5%",
+      }}
     />
     <Text
         //Register

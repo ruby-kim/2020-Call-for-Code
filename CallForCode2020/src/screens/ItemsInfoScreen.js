@@ -32,9 +32,8 @@ export default function ItemsInfoScreen({ route,navigation }) {
   return new ItemsInfoScreenClass(route.params,navigation);
 }
 
-
 const getProductinfoFromApi = (self,id) => {
-  fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/productinfo', {
+  fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/productList', {
    method: 'POST',
    headers: {
      'Accept': 'application/json',
@@ -44,7 +43,7 @@ const getProductinfoFromApi = (self,id) => {
    .then((response) => response.json())
    .then((json)=>{
      self.setState({
-       desc : json.description,
+       desc : json.description
      });
    });
 }

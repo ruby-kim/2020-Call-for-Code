@@ -31,11 +31,11 @@ function loginClick(props){
             ['id', json._id],
             ['password', json.password]
         ]);
-        CommonDataManager.getInstance().initManager();
+          CommonDataManager.getInstance().initManager();
            props.state.prop.navigation.navigate('StartScreen', {});
+           return;
          }
-         else
-            alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
+          alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
       })
 }
 
@@ -96,33 +96,34 @@ class LoginScrennClass extends React.Component{
         onChangeText={(text) => { this.setState({id:text})}}
         editable={true}
         style={{ position: 'absolute',
-        top: "33.5%",
+        top: "35%",
         left: "15%",
         width: "70%",
-        height: "6%",
-        backgroundColor: 'ivory'}}
+        height: "5%",
+       }}
       />
         <TextInput
         onChangeText={(text) => { this.setState({password:text})}}
         editable={true}
         style={{ position: 'absolute',
-        top: "44.8%",
+        top: "45%",
         left: "15%",
         width: "70%",
-        height: "6%",
-        backgroundColor: 'ivory'}}
+        height: "5%",
+       }}
       />
-      <Text
-        //Login
-        onPress={()=>{loginClick(this);}}
+
+        <Text
+       //login
+        onPress={()=>{ loginClick(this);}}
         style={{ position: 'absolute',
-        top: "56%",
+        top: "55.8%",
         opacity:0,
-        left: "12.3%",
-        width: "75%",
+        left: "10%",
+        width: "77%",
         height: "6%",
-        backgroundColor: 'ivory'}}
-      />
+        }}/>
+     
        <Text
        //Register
         onPress={()=>{ this.state.prop.navigation.navigate('RegisterScreen', {});}}
@@ -132,17 +133,20 @@ class LoginScrennClass extends React.Component{
         left: "30%",
         width: "40%",
         height: "4%",
-        backgroundColor: 'ivory'}}/>
+        
+        }}/>
+        
         <Text
         //Forget
         onPress={()=>{forgetPassword();}}
         style={{ position: 'absolute',
         opacity:0,
-        top: "40%",
-        left: "77%",
+        top: "41%",
+        left: "81%",
         width: "10%",
-        height: "4%",
-        backgroundColor: 'ivory'}}/>
+        height: "3%",
+
+        }}/>
       </View>
       );
  }
