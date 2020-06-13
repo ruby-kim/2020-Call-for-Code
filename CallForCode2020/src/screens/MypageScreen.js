@@ -46,11 +46,7 @@ const editProfilePicture = async (props) => {
       body: formdata
       }).then((response) => response.text())
       .then((json) => {
-<<<<<<< HEAD
         commonData.initManager();
-=======
-        alert(json);
->>>>>>> c4862b525295edc5b245c5de97e0de51b22b58e2
       });
 };
 
@@ -58,7 +54,6 @@ const editProfilePicture = async (props) => {
 class MypageScreenClass extends React.Component{
   constructor(props) {
     super()
-<<<<<<< HEAD
     var data = [];
     commonData.saveState(this);
     if(commonData._history != "null"){  
@@ -68,11 +63,6 @@ class MypageScreenClass extends React.Component{
   
     this.state = {history :data,point : commonData._point,  path:commonData._path, prop : props}
     }
-=======
->>>>>>> c4862b525295edc5b245c5de97e0de51b22b58e2
-
-    this.state = {path:commonData._path, prop : props}
- }
 
  render() {
   return (
@@ -86,15 +76,9 @@ class MypageScreenClass extends React.Component{
         </TouchableHighlight>
         <Text style={styles.userName}>유저이름</Text>
       </View>
-<<<<<<< HEAD
       <View style={{marginBottom:"5%",marginTop:"5%"}}>
         <Text style={styles.point}>Point :  {this.state.point}</Text>
         <Text style={styles.point}>Max Point : {this.state.point}</Text>
-       
-=======
-      <View style={styles.menuList}>
-        <Text style={styles.item}>tet</Text>
->>>>>>> c4862b525295edc5b245c5de97e0de51b22b58e2
       </View>
     </View>
   );
