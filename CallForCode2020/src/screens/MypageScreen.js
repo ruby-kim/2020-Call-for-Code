@@ -4,17 +4,13 @@ import {
   View,
   Text, 
   Image,
-  TouchableHighlight,Dimensions,
-  FlatList,
-  Button
+  TouchableHighlight
 } from 'react-native';
 
 
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import CommonDataManager from "../singleton/CommonDataManager"
-import { ScrollView } from 'react-native-gesture-handler';
-
 let commonData = CommonDataManager.getInstance();
 
 
@@ -27,20 +23,21 @@ const editProfilePicture = async (props) => {
   }
 
   let pickerResult = await ImagePicker.launchImageLibraryAsync();
-  if (pickerResult.cancelled === true || pickerResult == null) 
+  if (pickerResult.cancelled === true) 
     return;
+
 
 
     let photo = { uri: pickerResult.uri }
     let formdata = new FormData();
-    let filename =  Date.now() + commonData._id + "." + commonData._path.split('/').pop().split('.').pop();
-  
+    let filename = commonData._rev + commonData._id + "." + commonData._path.split('/').pop().split('.').pop();
+
     formdata.append("id", commonData._id);
     formdata.append("password", commonData._password);
-    formdata.append("path","profile/" + filename);
+    formdata.append("path",filename);
     formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
 
-    props.setState({path:"https://getstartednode-balanced-quokka-og.mybluemix.net/img/profile/" + filename});
+    props.setState({path:"https://getstartednode-balanced-quokka-og.mybluemix.net" + filename});
     fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/profile',{
       method: 'post',
       headers: {
@@ -50,64 +47,32 @@ const editProfilePicture = async (props) => {
       }).then((response) => response.text())
       .then((json) => {
         alert(json);
-        commonData.initManager();
       });
 };
 
-function Item({ navigation, title }) {
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      <Image source ={{uri:"https://getstartednode-balanced-quokka-og.mybluemix.net/img/"+title.path}} 
-      style ={{
-        marginTop:"4%",
-        marginLeft:"10%",
-        width:Dimensions.get('window').width/1.25, 
-        height:Dimensions.get('window').height/3, 
-        backgroundColor: 'grey'
-        }}>
-    </Image>
-  </View>
-  );
-}
 
 class MypageScreenClass extends React.Component{
   constructor(props) {
     super()
-    var data = [];
-    if(commonData._history != "null"){  
-      commonData._history.split(' ').forEach(item=>{
-        data.push({ path : item});
-    })}
-  
-    this.state = {history :data, path:commonData._path, prop : props}
-    }
 
-   
+    this.state = {path:commonData._path, prop : props}
+ }
 
  render() {
   return (
     <View style={styles.container}>
-      <ScrollView>
-      <View >
-        <TouchableHighlight onPress={() => editProfilePicture(this)}>
-          <Image 
-            style={styles.userImage}
-            source={{uri:this.state.path}}
-          />
+      <View style={styles.profile}>
+      <TouchableHighlight onPress={() => editProfilePicture()}>
+        <Image 
+          style={styles.userImage}
+          source={{uri:this.state.path}}
+        />
         </TouchableHighlight>
-        <Text style={styles.userName}>{commonData._name}</Text>
+        <Text style={styles.userName}>유저이름</Text>
       </View>
-      <View style={{marginBottom:"5%",marginTop:"5%"}}>
-        <Text style={styles.point}>Point :  {commonData._point}</Text>
-        <Text style={styles.point}>Max Point : {commonData._maxPoint}</Text>
-       
+      <View style={styles.menuList}>
+        <Text style={styles.item}>tet</Text>
       </View>
-      <FlatList
-        data={this.state.history}
-        renderItem={({ item }) => <Item navigation={this.state.navigation} title={item} />}
-        keyExtractor={item => "saadsa"}
-      />
-      </ScrollView>
     </View>
   );
  }
@@ -123,15 +88,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-  }, 
-  point: {
-    marginLeft : "10%",
-    textAlign: 'left',
-    paddingTop: 10,
-    fontSize: 20,
   },
   profile: {
-    backgroundColor: '#fefeff',
+    backgroundColor: '#fefefe',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -143,15 +102,18 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderWidth: 2,
-    marginTop :"4%",
-    marginLeft:"37.9%",
-    backgroundColor: "grey",
     borderColor: "#f2f2f2",
   },
   userName: {
-    textAlign:"center",
     paddingTop: 10,
     fontSize: 20,
+  },
+  menuList: {
+    backgroundColor: '#fefefe',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    flex: 1,
+    alignItems: 'center',
   }
-  
 });

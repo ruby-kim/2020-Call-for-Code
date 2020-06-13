@@ -2,7 +2,7 @@ import * as React from "react"
 import Svg, { G, Rect, Path, Defs } from "react-native-svg"
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
-function MajorHeading(props) {
+function MajorDesc(props) {
   return (
     <Svg width={375} height={242} viewBox="0 0 375 242" fill="none" {...props}>
       <G filter="url(#prefix__filter0_d)">
@@ -17,4 +17,4 @@ function MajorHeading(props) {
   )
 }
 
-export default MajorHeading
+export default MajorDesc
