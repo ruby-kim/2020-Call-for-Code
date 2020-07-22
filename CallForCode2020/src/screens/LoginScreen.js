@@ -1,43 +1,88 @@
 import * as React from "react"
 import Svg, { Path, G } from "react-native-svg"
 import {
-  TextInput, View,Button,Text,AsyncStorage
+  TextInput, View,Button,Text,AsyncStorage, Alert
 } from 'react-native';
 
 import CommonDataManager from "../singleton/CommonDataManager"
 
 function loginClick(props){
-
-  if(props.state.id == "" || props.state.password == ""){
-    alert("아이디와 비밀번호를 입력해주세요!");
+  if(checkLoginState(props) == false){
+    alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
     return;
   }
-
-
-  var data = {id:props.state.id, password : props.state.password};
-  fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }).then((response) => response.json())
-      .then((json) => {
-         if(json != "Fail"){  
-          AsyncStorage.clear();
-          AsyncStorage.multiSet([
-            ['isAuto', "true"],
-            ['id', json._id],
-            ['password', json.password]
-        ]);
-          CommonDataManager.getInstance().initManager();
-           props.state.prop.navigation.navigate('StartScreen', {});
-           return;
-         }
-          alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
-      })
+  login(props);
 }
+
+function checkLoginState(props){
+  if(props.state.id == "" || props.state.password == ""){
+    return false;
+  }
+  return true;
+}
+
+function login(props){
+    let jsonData = null;
+    AsyncStorage.multiGet(['isAuto', 'id', 'password']).then((data) => {
+      if(data[0][1] != null && data[1][1] != null && data[2][1] != null) 
+          jsonData = {id:data[1][1], password : data[2][1] };
+    });
+    
+
+    if(jsonData == null && checkLoginState(props) == false){
+      return;
+    }else if(jsonData == null)
+      jsonData = {id:props.state.id, password : props.state.password};
+
+ 
+
+
+    fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/login', {
+          method: 'post',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(jsonData),
+        }).then((response) => response.json())
+        .then((json) => { 
+          if(json == "Fail"){
+            alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
+            props.setState={id:"",password:""};
+            return;
+          }
+          else{
+            AsyncStorage.clear();
+            AsyncStorage.multiSet([
+              ['isAuto', "true"],
+              ['id', json._id],
+              ['password', json.password]
+            ]);
+
+            var path = null;
+          if(json.path.split('/').pop() == "basic.jpg")
+              path  = "https://getstartednode-balanced-quokka-og.mybluemix.net/img/profile/basic.jpg";
+          else 
+              path = "https://getstartednode-balanced-quokka-og.mybluemix.net/img/" + json.path;
+
+            props.state.prop.navigation.navigate('StartScreen', {
+                id : json._id,
+                password: json.password,
+                rev: json.rev,
+                name: json.name,
+                path : json.path ,
+                point: json.point,
+                maxPoint: json.maxPoint,
+                history: json.history
+            });
+            jsonData = null;
+          }
+      }).catch((e) =>{
+        alert("Login Fail 비밀번호 혹은 아이디를 재확인해주세요.");
+      });
+}
+
+
 
 const forgetPassword = () =>{
   alert("Something once lost will never return. MAKE IT NEW");
@@ -49,7 +94,12 @@ class LoginScrennClass extends React.Component{
   constructor(props) {
     super()
     this.state = {id:"",password:"", prop : props}
+   
  }
+
+ componentDidMount() {
+   login(this);
+}
 
  render() {
     return ( 
@@ -93,6 +143,7 @@ class LoginScrennClass extends React.Component{
         <Path d="M110.084 558.367h155.825v.684H110.084v-.684z" fill="#0DC6B6" />
       </Svg>
       <TextInput
+        value={this.state.id}
         onChangeText={(text) => { this.setState({id:text})}}
         editable={true}
         style={{ position: 'absolute',
@@ -103,6 +154,7 @@ class LoginScrennClass extends React.Component{
        }}
       />
         <TextInput
+        value={this.state.password}
         onChangeText={(text) => { this.setState({password:text})}}
         editable={true}
         style={{ position: 'absolute',

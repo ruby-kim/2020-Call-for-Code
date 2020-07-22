@@ -26,8 +26,6 @@ const editProfilePicture = async (props) => {
   if (pickerResult.cancelled === true) 
     return;
 
-
-
     let photo = { uri: pickerResult.uri }
     let formdata = new FormData();
     let filename = commonData._rev + commonData._id + "." + commonData._path.split('/').pop().split('.').pop();
@@ -46,6 +44,7 @@ const editProfilePicture = async (props) => {
       body: formdata
       }).then((response) => response.text())
       .then((json) => {
+        alert(json);
         commonData.initManager();
       });
 };

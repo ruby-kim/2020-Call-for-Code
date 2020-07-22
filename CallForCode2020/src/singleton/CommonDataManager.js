@@ -1,19 +1,11 @@
 import * as React from 'react';
 import {AsyncStorage , Image, Alert} from 'react-native';
 
-export default class CommonDataManager {
-
+export default class CommonDataManager{
     static myInstance = null;
 
     _isAutoLogin = false;
-    _id = "";
-    _rev = "";
-    _password = "";
-    _path = "";
-    _point = "";
-    _maxPoint = "";
-    _name = "";
-    _history = "";
+ 
     
     _stats=null;
     /**

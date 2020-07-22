@@ -52,12 +52,12 @@ export default function NewsScreen({ navigation }) {
 function Item({ navigation, title }) {
   return (
     <View style={styles.item} >
-      <View style={styles.list}>
-        <Text style={styles.title} onPress={() => navigation.navigate('NewsInfo', {
+      <View style={styles.list} onPress={() => navigation.navigate('NewsInfo', {
         title: title.title,
         id:title.id,
         dateTime :title.dateTime
-        })}>{title.title}</Text>
+        })}>
+        <Text style={styles.title} >{title.title}</Text>
         <Text style={styles.subtitle}>{title.subtitle}</Text>
         <Text style={styles.dateTime}>{title.dateTime}</Text>
       </View>
