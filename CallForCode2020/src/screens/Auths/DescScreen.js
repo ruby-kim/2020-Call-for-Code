@@ -10,10 +10,10 @@ import BtnListDesc2 from '../../components/Auths/PublicTransport/BtnListDesc2'
 import BtnListDesc3 from '../../components/Auths/PublicTransport/BtnListDesc3'
 import BtnListDesc4 from '../../components/Auths/PublicTransport/BtnListDesc4'
 
-class DescScreenClass extends React.Component {
+
+export default class DescScreenClass extends React.Component {
     constructor(props) {
-        super()
-        this.state = { prop: props }
+        super(props)
     }
     render() {
         return (
@@ -31,17 +31,17 @@ class DescScreenClass extends React.Component {
                 {/* Description list */}
                 <View style={styles.descList}>
                     <TouchableOpacity onPress={() => {
-                        this.state.prop.navigation.navigate('JudgeScreen')
+                        this.props.navigation.navigate('JudgeScreen')
                     }}>
                         <BtnListDesc1 />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
-                        this.state.prop.navigation.navigate('CameraScreen')
+                        this.props.navigation.navigate('CameraScreen',{params : this.props.route.params.props})
                     }}>
                         <BtnListDesc2 />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
-                        this.state.prop.navigation.navigate('EditScreen')
+                        this.props.navigation.navigate('EditScreen')
                     }}>
                         <BtnListDesc3 />
                     </TouchableOpacity>
@@ -51,12 +51,6 @@ class DescScreenClass extends React.Component {
         )
     }
 }
-function DescScreen(props) {
-    return new DescScreenClass(props);
-}
-
-export default DescScreen;
-
 
 const styles = StyleSheet.create({
     container: {

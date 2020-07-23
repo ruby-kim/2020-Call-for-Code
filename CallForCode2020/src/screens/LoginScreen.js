@@ -93,7 +93,7 @@ const forgetPassword = () =>{
 class LoginScrennClass extends React.Component{
   constructor(props) {
     super()
-    this.state = {id:"",password:"", prop : props}
+    this.state = {id:"As",password:"As", prop : props}
    
  }
 

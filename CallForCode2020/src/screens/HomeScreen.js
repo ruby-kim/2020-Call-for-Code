@@ -15,12 +15,14 @@ import Svg, {
 } from "react-native-svg"
 import { View,Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
-
+import CommonDataManager from '../singleton/CommonDataManager';
 import Layout from '../constants/Layout'
 
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
-function HomeScreen(props) {
+function HomeScreen({ navigation, route }) {
+  var props = navigation;
+  console.log(route);
   return (
     <View>
     <Svg width={Layout.window.width} height={Layout.window.height} viewBox="0 0 375 812" fill="none" {...props}>

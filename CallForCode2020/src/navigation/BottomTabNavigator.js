@@ -14,17 +14,19 @@ import NewsScreen from '../screens/NewsScreen';
 import ItemsScreen from '../screens/ItemsScreen';
 import LoginScreen from '../screens/LoginScreen';
 
+import TabNav from './TabNav';
+
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
 export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({ headerTitle: getHeaderTitle(route), headerShown : false });
+  navigation.setOptions({ headerTitle: null, headerShown : false });
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={TabNav}
         options={{
           header: null,
           title: '',
@@ -32,10 +34,12 @@ export default function BottomTabNavigator({ navigation, route }) {
             <Entypo focused={focused} name="home" size={24} color="lightgray" />
           )
         }}
+
+        screenProps={'test'} 
       />
       <BottomTab.Screen
         name="News"
-        component={NewsScreen}
+        component={TabNav}
         options={{
           title: '',
           tabBarIcon: ({ focused }) => <FontAwesome focused={focused} name="newspaper-o" size={24} color="lightgray" />,
@@ -43,7 +47,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Auths"
-        component={AuthsScreen}
+        component={TabNav}
         options={{
           title: '',
           tabBarIcon: ({ focused }) => <MaterialCommunityIcons focused={focused} name="apple-keyboard-command" size={24} color="lightgray" />,
@@ -51,7 +55,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Items"
-        component={ItemsScreen}
+        component={TabNav}
         options={{
           title: '',
           tabBarIcon: ({ focused }) => <Entypo focused={focused} name="leaf" size={24} color="lightgray" />,
@@ -59,7 +63,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Mypage"
-        component={MypageScreen}
+        component={TabNav}
         options={{
           title: "",
           tabBarIcon: ({ focused }) => <AntDesign focused={focused} name="user" size={24} color="lightgray" />,
@@ -67,8 +71,4 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
     </BottomTab.Navigator>
   );
-}
-
-function getHeaderTitle(route) {
-  return null;
 }

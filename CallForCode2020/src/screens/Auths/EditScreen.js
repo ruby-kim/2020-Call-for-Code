@@ -7,10 +7,9 @@ import UploadAuthTitle from '../../components/Auths/UploadAuthTitle'
 import DescImageAuth from '../../components/Auths/DescImageAuth'
 import Section3Content from '../../components/Auths/PublicTransport/Section3Content'
 
-class EditScreenClass extends React.Component {
+export default class EditScreenClass extends React.Component {
     constructor(props) {
-        super()
-        this.state = { prop: props }
+        super(props)
     }
     render() {
         return (
@@ -35,11 +34,6 @@ class EditScreenClass extends React.Component {
         )
     }
 }
-function EditScreen(props) {
-    return new EditScreenClass(props);
-}
-
-export default EditScreen;
 
 
 const styles = StyleSheet.create({

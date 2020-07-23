@@ -4,8 +4,20 @@ import {AsyncStorage , Image, Alert} from 'react-native';
 export default class CommonDataManager{
     static myInstance = null;
 
-    _isAutoLogin = false;
- 
+
+    getTestState(){
+        
+    }
+
+    _isAutoLogin = "false";
+    _id = "";
+    _rev = "";
+    _password = "";
+    _path = "";
+    _point = "";
+    _maxPoint = "";
+    _name = "";
+    _history = "";
     
     _stats=null;
     /**
@@ -14,7 +26,6 @@ export default class CommonDataManager{
     static getInstance() {
         if (CommonDataManager.myInstance == null) {
             CommonDataManager.myInstance = new CommonDataManager();
-            this.myInstance.initManager();
         }
         return this.myInstance;
     }

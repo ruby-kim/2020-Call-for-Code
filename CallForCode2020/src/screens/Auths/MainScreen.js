@@ -11,10 +11,14 @@ import OptionWalk from '../../components/Auths/Walk/OptionWalk'
 import OptionRecycle from '../../components/Auths/Recycle/OptionRecycle'
 import BtnAdd from '../../components/BtnAdd'
 
-class MainScreenClass extends React.Component {
+
+
+
+export default class MainScreenClass extends React.Component {
   constructor(props) {
-    super()
-    this.state = { prop: props }
+    super(props)
+    console.log(this.props)
+    console.log("+++++++++++++++++++++++++++++=")
   }
 
   render() {
@@ -33,13 +37,17 @@ class MainScreenClass extends React.Component {
         <View style={styles.groupingSvg}>
           <View style={styles.settingRowDir}>
             <TouchableOpacity onPress={() => {
-              this.state.prop.navigation.navigate('DescScreen')
+              this.props.navigation.navigate('DescScreen',{
+                props : this.props
+                });
             }}>
               <OptionReadNews />
             </TouchableOpacity>
             <Text>     </Text>
             <TouchableOpacity onPress={() => {
-              this.state.prop.navigation.navigate('DescScreen')
+                     this.props.navigation.navigate('DescScreen',{
+                      props : this.props
+                      });
             }}>
               <OptionPublicTransport />
             </TouchableOpacity>
@@ -47,13 +55,17 @@ class MainScreenClass extends React.Component {
 
           <View style={styles.settingRowDir}>
             <TouchableOpacity onPress={() => {
-              this.state.prop.navigation.navigate('DescScreen')
+                     this.props.navigation.navigate('DescScreen',{
+                      props : this.props
+                      });
             }}>
               <OptionWalk />
             </TouchableOpacity>
             <Text>     </Text>
             <TouchableOpacity onPress={() => {
-              this.state.prop.navigation.navigate('DescScreen')
+                    this.props.navigation.navigate('DescScreen',{
+                      props : this.props
+                      });
             }}>
               <OptionRecycle />
             </TouchableOpacity>
@@ -68,11 +80,6 @@ class MainScreenClass extends React.Component {
     );
   }
 }
-function MainScreen(props) {
-  return new MainScreenClass(props);
-}
-
-export default MainScreen;
 
 const styles = StyleSheet.create({
   container: {

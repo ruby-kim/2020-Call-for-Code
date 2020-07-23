@@ -1,16 +1,22 @@
 import * as React from 'react';
-import {Dimensions, ScrollView, Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
+import {TouchableOpacity, ScrollView, Button, SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 
 
 
-class NewsScreenClass extends React.Component{
-  constructor(navigation) {
-    super()
-    this.state = {load : false , pages : 0, newsData : [], navigation : navigation}
+export default class NewsScreenClass extends React.Component{
+  constructor(props) {
+    super(props)
+
+    this.state = {load : false , pages : 0, newsData : []}
     getNewsListFromApi(this);
+    this.handleClick = this.handleClick.bind(this);
  }
 
+
+ handleClick = () => {
+  alert('Button clicked!');
+}
 
  render() {
     return (
@@ -19,19 +25,18 @@ class NewsScreenClass extends React.Component{
       if (isCloseToBottom(nativeEvent)) {
         if(this.state.load == false){
           this.state.load = true;
-          getNewsListFromApi(this)
+           getNewsListFromApi(this)
         }
-         
       }
     }}
+    //
     scrollEventThrottle={400}> 
-      <Button title="Go back" onPress={() => this.state.navigation.goBack()} />
+      <Button title="Go back" onPress={() => {this.props.navigation.goBack()}} />
       <FlatList
         data={this.state.newsData}
-        renderItem={({ item }) => <Item navigation={this.state.navigation} title={item} />}
+        renderItem={({ item }) => <Item navigation={this.props.navigation} title={item} handleClick={this.handleClick}/>}
         keyExtractor={item => item.id}
       />
-      
       </ScrollView>
       </SafeAreaView>
     );
@@ -45,14 +50,11 @@ const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
 };
 
 
-export default function NewsScreen({ navigation }) {
-  return new NewsScreenClass(navigation);
-}
 
-function Item({ navigation, title }) {
+function Item({ navigation, title ,handleClick}) {
   return (
-    <View style={styles.item} >
-      <View style={styles.list} onPress={() => navigation.navigate('NewsInfo', {
+    <View style={styles.item}>
+      <TouchableOpacity style={styles.list} onPress={() => navigation.navigate('NewsInfo', {
         title: title.title,
         id:title.id,
         dateTime :title.dateTime
@@ -60,7 +62,7 @@ function Item({ navigation, title }) {
         <Text style={styles.title} >{title.title}</Text>
         <Text style={styles.subtitle}>{title.subtitle}</Text>
         <Text style={styles.dateTime}>{title.dateTime}</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

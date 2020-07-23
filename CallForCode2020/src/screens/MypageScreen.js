@@ -10,74 +10,73 @@ import {
 
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
-import CommonDataManager from "../singleton/CommonDataManager"
-let commonData = CommonDataManager.getInstance();
 
 
-const editProfilePicture = async (props) => {
-  let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
-
-  if (permissionResult.granted === false) {
-    alert('Permission to access camera roll is required!');
-    return;
+export default class MypageScreenClass extends React.Component{
+  constructor(props) {
+    super(props)
+    console.log("==========");
+    console.log(this.props);
+    /*
+    var data = [];
+    if( this.props.history != "null"){  
+      this.props.history.split(' ').forEach(item=>{
+        data.push({ path : item});
+    })}*/
+    this.editProfilePicture = this.editProfilePicture.bind(this);
   }
 
-  let pickerResult = await ImagePicker.launchImageLibraryAsync();
-  if (pickerResult.cancelled === true) 
-    return;
-
-    let photo = { uri: pickerResult.uri }
-    let formdata = new FormData();
-    let filename = commonData._rev + commonData._id + "." + commonData._path.split('/').pop().split('.').pop();
-
-    formdata.append("id", commonData._id);
-    formdata.append("password", commonData._password);
-    formdata.append("path",filename);
-    formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
-
-    props.setState({path:"https://getstartednode-balanced-quokka-og.mybluemix.net" + filename});
-    fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/profile',{
-      method: 'post',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      body: formdata
-      }).then((response) => response.text())
-      .then((json) => {
-        alert(json);
-        commonData.initManager();
-      });
-};
-
-
-class MypageScreenClass extends React.Component{
-  constructor(props) {
-    super()
-    var data = [];
-    commonData.saveState(this);
-    if(commonData._history != "null"){  
-      commonData._history.split(' ').forEach(item=>{
-        data.push({ path : item});
-    })}
+  editProfilePicture = async (props) => {
+    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
   
-    this.state = {history :data,point : commonData._point,  path:commonData._path, prop : props}
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
     }
+  
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    if (pickerResult.cancelled === true) 
+      return;
+  
+      let photo = { uri: pickerResult.uri }
+      let formdata = new FormData();
+      let filename = this.props.params.rev + this.props.params.id + "." + this.props.params.path.split('/').pop().split('.').pop();
+  
+      formdata.append("id", this.props.params.id);
+      formdata.append("password", this.props.params.password);
+      formdata.append("path",filename);
+      formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
+  
+      props.setState({path:"https://getstartednode-balanced-quokka-og.mybluemix.net" + filename});
+      fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/profile',{
+        method: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formdata
+        }).then((response) => response.text())
+        .then((json) => {
+          alert(json);
+        });
+  };
+
+
 
  render() {
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
-      <TouchableHighlight onPress={() => editProfilePicture()}>
+      <TouchableHighlight onPress={() => this.editProfilePicture()}>
         <Image 
           style={styles.userImage}
-          source={{uri:this.state.path}}
+          source={{uri:this.props.params.path}}
         />
         </TouchableHighlight>
-        <Text style={styles.userName}>유저이름</Text>
+        <Text style={styles.userName}>{this.props.params.name}</Text>
       </View>
       <View style={{marginBottom:"5%",marginTop:"5%"}}>
-        <Text style={styles.point}>Point :  {this.state.point}</Text>
-        <Text style={styles.point}>Max Point : {this.state.point}</Text>
+        <Text style={styles.point}>Point :  {this.props.params.point == "" ? 0 : this.props.params.point}</Text>
+        <Text style={styles.point}>Max Point : {this.props.params.maxPoint? 0 : this.props.params.maxPoint}</Text>
       </View>
     </View>
   );
@@ -85,9 +84,6 @@ class MypageScreenClass extends React.Component{
 }
 
 
-export default function MypageScreen({ navigation }) {
-  return new MypageScreenClass(navigation);
-}
 
 
 const styles = StyleSheet.create({

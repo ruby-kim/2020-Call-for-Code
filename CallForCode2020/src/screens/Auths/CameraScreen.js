@@ -12,67 +12,71 @@ import Svg, {
 import {View,Text , Image,} from "react-native"
 import * as ImagePicker from 'expo-image-picker';
 import CommonDataManager from '../../singleton/CommonDataManager';
+import Section1Contest from "../../components/Auths/PublicTransport/Section1Content";
 const commonData = CommonDataManager.getInstance();
 
 
-const openImagePickerAsync = async (props) => {
-  let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
 
-  if (permissionResult.granted === false) {
-    alert('Permission to access camera roll is required!');
-    return;
+
+export default  class CameraScreenClass extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state ={picture:null};
+        this.openImagePickerAsync = this.openImagePickerAsync.bind(this);
+        this.sendPictureToServer = this.sendPictureToServer.bind(this);
+    }
+
+
+    openImagePickerAsync = async (props) => {
+      let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+    
+      if (permissionResult.granted === false) {
+        alert('Permission to access camera roll is required!');
+        return;
+      }
+    
+      let pickerResult = await ImagePicker.launchCameraAsync();
+      if (pickerResult.cancelled === true) 
+        return;
+    
+      
+        let photo = { uri: pickerResult.uri }
+        props.setState({picture:photo});
+        
+    };
+
+    sendPictureToServer =(props)=>{
+
+      let photo = props.state.picture;
+      if(photo == null){
+          alert("사진을 찍어주세요!");
+          return;
+      }
+  
+      let formdata = new FormData();
+      let filename = Date.now() + photo.uri.split('/').pop();
+      formdata.append("id", commonData._id);
+      formdata.append("password", commonData._password);
+      formdata.append("path",  "certification/"  + filename);
+      formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
+      fetch('https://getstartednode-balanced-quokka-og.mybluemix.net/api/certificationbyimg',{
+        method: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formdata
+        }).then((response) => response.text())
+        .then((json) => {   
+          this.props.route.params.params.updatePoint();
+         alert("Plus +10 Point! your point is " + (this.props.route.params.params.params.point + 10));
+        } );
+       
   }
 
-  let pickerResult = await ImagePicker.launchCameraAsync();
-  if (pickerResult.cancelled === true) 
-    return;
-
-  
-    let photo = { uri: pickerResult.uri }
-    props.setState({picture:photo});
-    
-
-   
-};
-
-const sendPictureToServer =(props)=>{
-
-    let photo = props.state.picture;
-    if(photo == null){
-        alert("사진을 찍어주세요!");
-        return;
-    }
-
-    let formdata = new FormData();
-    let filename = Date.now() + photo.uri.split('/').pop();
-    formdata.append("id", commonData._id);
-    formdata.append("password", commonData._password);
-    formdata.append("path",  "certification/"  + filename);
-    formdata.append("uploaded_file", {uri: photo.uri, name: filename, type: 'multipart/form-data'})
-    fetch('http://192.168.0.102:3000/certificationbyimg',{
-      method: 'post',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      body: formdata
-      }).then((response) => response.text())
-      .then((json) => {   
-       alert("Plus +10 Point!");
-      } );
-     
-      
-}
-
-
-class CameraScreenClass extends React.Component {
-    constructor(props) {
-        super()
-        this.state = { picture : null ,prop:props}
-    }
     render() { 
         return (
             <View>
-            <Svg width={"100%"} height={"100%"} viewBox="0 0 375 812" fill="none" {...this.state.prop}>
+            <Svg width={"100%"} height={"100%"} viewBox="0 0 375 812" fill="none" {...this.props}>
       <G clipPath="url(#prefix__clip0)">
         <Path fill="#fff" d="M0 0h375v812H0z" />
         <G filter="url(#prefix__filter0_d)">
@@ -249,7 +253,7 @@ class CameraScreenClass extends React.Component {
             }}
         />
           <Text
-          onPress= {()=>{openImagePickerAsync(this);}}
+          onPress= {()=>{this.openImagePickerAsync(this);}}
           style={{ position: 'absolute',
           top: "48%",
           opacity:1,
@@ -259,7 +263,7 @@ class CameraScreenClass extends React.Component {
           }}/>
           <Text
           //인증하기!
-          onPress= {()=>{sendPictureToServer(this);}}
+          onPress= {()=>{this.sendPictureToServer(this);}}
           style={{ position: 'absolute',
           top: "78%",
           opacity:0,
@@ -271,10 +275,3 @@ class CameraScreenClass extends React.Component {
         );
     }
 }
-
-
-function CameraScreen(navigation) {
-  return new CameraScreenClass(navigation);
-}
-
-export default CameraScreen;

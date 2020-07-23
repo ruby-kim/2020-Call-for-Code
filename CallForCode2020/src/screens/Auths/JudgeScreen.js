@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, ScrollView, SafeAreaView,Text, View, TouchableOpacity } from 'react-native'
 
 import UserBackBtnHeader from '../../components/BtnBackUserHeader'
 
@@ -14,20 +14,22 @@ class JudgeScreenClass extends React.Component {
     }
     render() {
         return (
-            <View>
+            <SafeAreaView>
+            <ScrollView>
                 <View style={[styles.container, styles.size]}>
                     {/* user & back icon */}
                     <View style={styles.userbackbtn}><UserBackBtnHeader /></View>
 
                     {/* usage title, description */}
+                  
                     <View style={styles.groupingHeaer}>
                         <MajorTitle style={styles.howtousage} />
                         <Section1Desc />
                         <Section1Content style={styles.section1content}/>
                     </View>
-
                 </View>
-            </View>
+            </ScrollView>
+            </SafeAreaView>
 
         )
     }
